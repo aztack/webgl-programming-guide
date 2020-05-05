@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>03.triangle</title>
+  <style type="text/css">
+    @import url('https://unpkg.com/aztec-ui@0.0.3/dist/aztec-ui/aztec-ui.css');
+  </style>
+  <script src="https://unpkg.com/aztec-ui@0.0.3/dist/aztec-ui/aztec-ui.js"></script>
+</head>
+<body class="aztec-app">
+  <az-section caption="Triangle">
+    <canvas id="canvas" width="400" height="400">
+      Please use a browser that supports "canvas"
+    </canvas>
+    <br/>
+    <az-toolbar>
+      <az-button id="btnTriangle" type="primary" caption="Triangle"></az-button>
+      <az-button id="btnPoints" type="primary" caption="Points"></az-button>
+      <az-button id="btnRotate" type="primary" caption="Rotate +5deg"></az-button>
+      <az-button id="btnRotateForever" type="primary" caption="Rotate Forever"></az-button>
+    </az-toolbar>
+</az-section>
+  <script type="module" src="./index.js"></script>
+</body>
+</html>

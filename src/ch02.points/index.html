@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>02.points</title>
+  <style type="text/css">
+    @import url('https://unpkg.com/aztec-ui@0.0.3/dist/aztec-ui/aztec-ui.css');
+  </style>
+  <script src="https://unpkg.com/aztec-ui@0.0.3/dist/aztec-ui/aztec-ui.js"></script>
+</head>
+<body class="aztec-app">
+  <az-section caption="Points">
+    <canvas id="canvas" width="400" height="400">
+      Please use a browser that supports "canvas"
+    </canvas>
+</az-section>
+  <script type="module">
+    import { setupWebGL, createProgram } from '../lib/utils.mjs';
+    setupWebGL(canvas)
+      .then(gl => createProgram(gl, './index.vs', './index.fs', true))
+      .then(gl => {
+        var a_Position = gl.getAttribLocation(gl.program, 'a_Position');
+        var u_FragColor = gl.getUniformLocation(gl.program, 'u_FragColor');
+
+        
+        gl.clearColor(0.0, 0.0, 0.0, 1.0);
+        gl.clear(gl.COLOR_BUFFER_BIT);
+
+        gl.uniform4f(u_FragColor, 1, 0, 0, 1);
+        gl.vertexAttrib3f(a_Position, -0.5, 0, 0.0);
+        gl.drawArrays(gl.POINTS, 0, 1);
+
+        gl.uniform4f(u_FragColor, 0, 1, 0, 1);
+        gl.vertexAttrib3f(a_Position, 0.5, 0, 0.0);
+        gl.drawArrays(gl.POINTS, 0, 1);
+      });
+  </script>
+</body>
+</html>

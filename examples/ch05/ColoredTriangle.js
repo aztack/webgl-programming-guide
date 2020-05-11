@@ -1,6 +1,6 @@
 // ColoredTriangle.js (c) 2012 matsuda
 // Vertex shader program
-var VSHADER_SOURCE = 
+var VSHADER_SOURCE =
   'attribute vec4 a_Position;\n' +
   'attribute vec4 a_Color;\n' +
   'varying vec4 v_Color;\n' +
@@ -10,10 +10,10 @@ var VSHADER_SOURCE =
   '}\n';
 
 // Fragment shader program
-var FSHADER_SOURCE = 
-  '#ifdef GL_ES\n' +
+var FSHADER_SOURCE =
+  // '#ifdef GL_ES\n' +
   'precision mediump float;\n' +
-  '#endif GL_ES\n' +
+  // '#endif GL_ES\n' +
   'varying vec4 v_Color;\n' +
   'void main() {\n' +
   '  gl_FragColor = v_Color;\n' +
@@ -36,7 +36,7 @@ function main() {
     return;
   }
 
-  // 
+  //
   var n = initVertexBuffers(gl);
   if (n < 0) {
     console.log('Failed to set the vertex information');
@@ -56,14 +56,14 @@ function main() {
 function initVertexBuffers(gl) {
   var verticesColors = new Float32Array([
     // Vertex coordinates and color
-     0.0,  0.5,  1.0,  0.0,  0.0, 
-    -0.5, -0.5,  0.0,  1.0,  0.0, 
-     0.5, -0.5,  0.0,  0.0,  1.0, 
+     0.0,  0.5,  1.0,  0.0,  0.0,
+    -0.5, -0.5,  0.0,  1.0,  0.0,
+     0.5, -0.5,  0.0,  0.0,  1.0,
   ]);
   var n = 3;
 
   // Create a buffer object
-  var vertexColorBuffer = gl.createBuffer();  
+  var vertexColorBuffer = gl.createBuffer();
   if (!vertexColorBuffer) {
     console.log('Failed to create the buffer object');
     return false;

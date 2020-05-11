@@ -6,22 +6,29 @@
   <title>03.triangle</title>
   <style type="text/css">
     @import url('https://unpkg.com/aztec-ui@0.0.3/dist/aztec-ui/aztec-ui.css');
+
   </style>
   <script src="https://unpkg.com/aztec-ui@0.0.3/dist/aztec-ui/aztec-ui.js"></script>
 </head>
 <body class="aztec-app">
-  <az-section caption="Triangle">
-    <canvas id="canvas" width="400" height="400">
+  <az-panel caption="Triangle">
+    <canvas id="canvas" width="400" height="400" style="align-self: flex-start">
       Please use a browser that supports "canvas"
     </canvas>
     <br/>
     <az-toolbar>
-      <az-button id="btnTriangle" type="primary" caption="Triangle"></az-button>
-      <az-button id="btnPoints" type="primary" caption="Points"></az-button>
+      <az-select id="drawType" style="height: 2em;">
+        <option>POINTS</option>
+        <option>LINES</option>
+        <option>LINE_LOOP</option>
+        <option>TRIANGLES</option>
+        <option>TRIANGLE_STRIP</option>
+      </az-select>
+      <az-button id="btnDraw" type="primary" caption="Draw"></az-button>
       <az-button id="btnRotate" type="primary" caption="Rotate +5deg"></az-button>
       <az-button id="btnRotateForever" type="primary" caption="Rotate Forever"></az-button>
     </az-toolbar>
-</az-section>
+  </az-panel>
   <script type="module" src="./index.js"></script>
 </body>
 </html>

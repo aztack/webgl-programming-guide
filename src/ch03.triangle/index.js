@@ -4,11 +4,18 @@ setupWebGL(canvas)
   .then(gl => {
     const n = initVertices(gl);
     // gl.vertexAttrib3f(a_Position, 0.5, 0, 0.0);
-    
+
     let lastType;
+    let color = [1, 0, 0, 1];
+    colorPicker.addEventListener('changed', e => {
+      const [r,g,b,a] = e.detail.match(/\d+/g);
+      color = [r/255, g/255, b/255, a].map(parseFloat);
+    });
     const draw = (type) => {
       lastType = type;
       gl.clearColor(0, 0, 0, 1);
+      const u_FragColor = gl.getUniformLocation(gl.program, 'u_FragColor');
+      gl.uniform4f(u_FragColor, color[0], color[1], color[2], color[3]);
       gl.clear(gl.COLOR_BUFFER_BIT);
       gl.drawArrays(gl[type], 0, n);
     };

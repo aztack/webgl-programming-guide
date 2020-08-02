@@ -11,6 +11,7 @@ setupWebGL(canvas)
       const [r,g,b,a] = e.detail.match(/\d+/g);
       color = [r/255, g/255, b/255, a].map(parseFloat);
     });
+
     const draw = (type) => {
       lastType = type;
       gl.clearColor(0, 0, 0, 1);
@@ -20,6 +21,19 @@ setupWebGL(canvas)
       gl.drawArrays(gl[type], 0, n);
     };
     let ANGLE = 90.0;
+    let Tx = 0, Ty = 0, Tz = 0;
+    toolbarTrans.addEventListener('click', e => {
+      const btn = e.target.closest('az-button');
+      if (!btn) return;
+      const dir = btn.icon.replace('arrow-', '');
+      const unit = 0.1
+      switch (dir) {
+        case 'up': Ty += unit; break;
+        case 'down': Ty -= unit; break;
+        case 'left': Tx -= unit; break;
+        case 'right': Tx += unit; break;
+      }
+    });
     const rotate = (angle = ANGLE) => {
       const radian = Math.PI * angle / 180.0;
       const cosB = Math.cos(radian);
@@ -27,9 +41,11 @@ setupWebGL(canvas)
 
       let u_CosB = gl.getUniformLocation(gl.program, 'u_CosB');
       let u_SinB = gl.getUniformLocation(gl.program, 'u_SinB');
+      let u_Translation = gl.getUniformLocation(gl.program, 'u_Translation');
 
       gl.uniform1f(u_CosB, cosB);
       gl.uniform1f(u_SinB, sinB);
+      gl.uniform4f(u_Translation, Tx, Ty, Tz, 0);
       draw(lastType);
     }
     btnDraw.onclick = (e) => {

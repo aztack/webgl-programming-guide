@@ -25,8 +25,11 @@ setupWebGL(canvas)
       gl.uniform1f(u_SinB, sinB);
       draw(lastType);
     }
-    btnTriangle.onclick = () => draw('TRIANGLES');
-    btnPoints.onclick = () => draw('POINTS');
+    btnDraw.onclick = (e) => {
+      const type = drawType.querySelector('select').value
+      draw(type);
+    };
+
 
     btnRotate.onclick = () => rotate(ANGLE += 5.0);
     rotate(ANGLE);

@@ -47,8 +47,8 @@ export function create3DContext(canvas, opts) {
 
 /**
  * Setup WebGL
- * @param {HTMLCanvasElement} canvas 
- * @param {*} opts 
+ * @param {HTMLCanvasElement} canvas
+ * @param {*} opts
  */
 export function setupWebGL (canvas, opts) {
   return new Promise((resolve, reject) => {
@@ -60,8 +60,8 @@ export function setupWebGL (canvas, opts) {
 }
 
 /**
- * 
- * @param {WebGLRenderingContext} gl 
+ *
+ * @param {WebGLRenderingContext} gl
  * @param {HTMLScriptElement | string} vs Vertex Shader
  * @param {HTMLScriptElement | string} fs Fragment Shader
  * @param {boolean} isUse is use created program
@@ -124,3 +124,12 @@ export function fetchShader(source) {
     return Promise.reject(new Error(`Failed to fetch shader`));
   }
 }
+
+export function initBuffer (gl, data, elemPerVertex, attribute) {
+  var buffer = gl.createBuffer();
+  if (!buffer) throw new Error('Failed to create buffer.');
+  gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+  gl.bufferData(gl.ARRAY_BUFFER, data, gl.STATIC_DRAW);
+  gl.vertexAttribPointer(attribute, elemPerVertex, gl.FLOAT, false, 0, 0);
+  gl.enableVertexAttribArray(attribute);
+};

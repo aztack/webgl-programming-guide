@@ -1,4 +1,4 @@
-import { setupWebGL, createProgram, raf, caf } from '../lib/utils.mjs';
+import { setupWebGL, createProgram, initBuffer, raf, caf } from '../lib/utils.mjs';
 setupWebGL(canvas)
   .then(gl => createProgram(gl, './index.vs', './index.fs', true))
   .then(gl => {
@@ -78,19 +78,11 @@ function initVertices(gl) {
     -0.5, -0.5,
     0.5, -0.5
   ]);
-  const vertexBuffer = gl.createBuffer();
-  if (!vertexBuffer) {
-    console.log('Failed to create the buffer object');
-    return -1;
-  }
-  gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
-  gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW);
   const a_Position = gl.getAttribLocation(gl.program, 'a_Position');
   if (a_Position < 0) {
     console.log('Failed to get the storage location of a_Position');
     return -1;
   }
-  gl.vertexAttribPointer(a_Position, 2, gl.FLOAT, false, 0, 0);
-  gl.enableVertexAttribArray(a_Position);
+  initBuffer(gl, vertices, 2, a_Position);
   return vertices.length / 2;
 }

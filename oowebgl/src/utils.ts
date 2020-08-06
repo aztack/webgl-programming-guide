@@ -60,3 +60,7 @@ export const isInteger = Number.isInteger || function(value) {
     isFinite(value) &&
     Math.floor(value) === value;
 };
+
+export function isDefined(val: unknown) {
+  return typeof val !== 'undefined';
+}

@@ -1,5 +1,6 @@
 import { OOWebGLObject } from "./object";
 import { WebGLContext } from "./types";
+import { isDefined } from "./utils";
 
 export class OOBuffer extends OOWebGLObject {
   buffer!: WebGLBuffer;
@@ -32,10 +33,14 @@ export class OOBuffer extends OOWebGLObject {
     return this;
   }
 
-  attribute(attr: number, elePerVertex: number) {
+  attribute(attr: number, elePerVertex: number, type?: number, normalized?: boolean, stride?: number, offset?: number) {
     this.ensureCreated();
     const gl = this.ctx;
-    gl.vertexAttribPointer(attr, elePerVertex, gl.FLOAT, false, 0, 0);
+    type = isDefined(type) ? type : gl.FLOAT;
+    normalized = isDefined(normalized) ? normalized : false;
+    stride = isDefined(stride) ? stride : 0;
+    offset = isDefined(offset) ? offset : 0;
+    gl.vertexAttribPointer(attr, elePerVertex, type!, normalized!, stride!, offset!);
     gl.enableVertexAttribArray(attr);
     return this;
   }

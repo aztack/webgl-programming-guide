@@ -125,20 +125,24 @@ export function fetchShader(source) {
   }
 }
 
-export function initBuffer (gl, data, attribute, elemPerVertex, stride = 0, offset = 0) {
-  var buffer = gl.createBuffer();
+export function initBuffer (gl, buffer, data, attribute, elemPerVertex, stride = 0, offset = 0) {
+  if (!buffer) buffer = gl.createBuffer();
   if (!buffer) throw new Error('Failed to create buffer.');
   gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
   gl.bufferData(gl.ARRAY_BUFFER, data, gl.STATIC_DRAW);
   gl.vertexAttribPointer(attribute, elemPerVertex, gl.FLOAT, false, stride, offset);
   gl.enableVertexAttribArray(attribute);
+  return buffer;
 };
 
 export function initTexture(gl, texture, sampler, image) {
+  if (!texture) texture = gl.createTexture();
+  if (!texture) throw new Error(`Failed to create texture`);
   gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 1);
   gl.activeTexture(gl.TEXTURE0);
   gl.bindTexture(gl.TEXTURE_2D, texture);
   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
   gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, image);
   gl.uniform1i(sampler, 0);
+  return texture;
 }

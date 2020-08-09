@@ -4,15 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>03.triangle</title>
-  <link rel="stylesheet" href="https://unpkg.com/aztec-ui@0.0.3/dist/aztec-ui/aztec-ui.css" />
-  <script src="https://unpkg.com/aztec-ui@0.0.3/dist/aztec-ui/aztec-ui.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/aztec-ui@0.0.5/dist/aztec-ui/aztec-ui.css" />
+  <script src="https://unpkg.com/aztec-ui@0.0.5/dist/aztec-ui/aztec-ui.js"></script>
 </head>
 <body class="aztec-app">
+  <image id="img" src="./sky.jpg"></image>
   <az-panel caption="Texture">
     <canvas id="canvas" width="400" height="400" style="align-self: flex-start">
       Please use a browser that supports "canvas"
     </canvas>
     <br/>
+    <label for="offsetX">Offset X
+      <az-slider caption="X" id="offsetX"></az-slider>
+    </label>
+    <label for="offsetX">Offset Y
+      <az-slider caption="Y" id="offsetY"></az-slider>
+    </label>
     <az-toolbar>
   <script type="module" src="./index.js"></script>
 </body>

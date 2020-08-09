@@ -43,11 +43,11 @@ function init(gl) {
   });
 
 
-
+  let buf1, buf2, tex1;
   function render() {
-    initBuffer(gl, vertices, a_Position, 2, FSIZE * 4, 0);
-    initBuffer(gl, vertices, a_TexCoord, 2, FSIZE * 4, FSIZE * 2);
-    initTexture(gl, gl.createTexture(), u_Sampler, img);
+    buf1 = initBuffer(gl, buf1, vertices, a_Position, 2, FSIZE * 4, 0);
+    buf2 = initBuffer(gl, buf2, vertices, a_TexCoord, 2, FSIZE * 4, FSIZE * 2);
+    tex1 = initTexture(gl, tex1, u_Sampler, img);
     draw(vertices.length / 4);
   }
 

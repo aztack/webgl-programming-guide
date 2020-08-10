@@ -1,0 +1,23 @@
+{
+  "devDependencies": {
+    "parcel-bundler": "^1.12.4",
+    "typescript": "^3.9.7"
+  },
+  "name": "webgl-programming-guide",
+  "version": "1.0.0",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "watch": "cd oowebgl && tsc --watch",
+    "ch02": "parcel src/ch02.points/index.html",
+    "ch03": "parcel src/ch03.triangle/index.html",
+    "ch05": "parcel src/ch05.texture/index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "gogs@aztack.wang:aztack/webgl-programming-guide"
+  },
+  "author": "aztack@163.com",
+  "license": "ISC"
+}

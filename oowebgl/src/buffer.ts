@@ -11,6 +11,7 @@ export class OOBuffer extends OOWebGLObject {
   init(ctx: WebGLContext) {
     super.init(ctx);
     const buf = ctx.createBuffer();
+    this.$debug(`buffer created`, buf);
     if (!buf) {
       throw new Error(`Create buffer failed!`);
     }
@@ -23,6 +24,7 @@ export class OOBuffer extends OOWebGLObject {
     this.ensureCreated();
     const gl = this.ctx;
     gl.bindBuffer(gl.ARRAY_BUFFER, this.buffer);
+    this.$debug('buffer bound');
     return this;
   }
 
@@ -30,6 +32,7 @@ export class OOBuffer extends OOWebGLObject {
     this.ensureCreated();
     const gl = this.ctx;
     gl.bufferData(gl.ARRAY_BUFFER, data, gl.STATIC_DRAW);
+    this.$debug('buffer filled with data', data);
     return this;
   }
 

@@ -35,7 +35,7 @@ export function fetchShader(source: ShaderSource) {
   return Promise.reject(new Error(`Failed to fetch shader`));
 }
 
-export function loadShader(gl: WebGLContext, source: ShaderSource, type: number) {
+export function loadShader(gl: WebGLContext, source: ShaderSource, type: number): Promise<{code: string, shader: WebGLShader}> {
   return fetchShader(source).then(code => {
     const shader = gl.createShader(type);
     if (!shader) {
@@ -50,7 +50,7 @@ export function loadShader(gl: WebGLContext, source: ShaderSource, type: number)
       gl.deleteShader(shader);
       throw err;
     }
-    return shader;
+    return {code, shader};
   });
 }
 
@@ -63,4 +63,8 @@ export const isInteger = Number.isInteger || function(value) {
 
 export function isDefined(val: unknown) {
   return typeof val !== 'undefined';
+}
+
+export function isArray(val: unknown) {
+  return Array.isArray ? Array.isArray(val) : Object.prototype.toString.call(val) === '[object Array]';
 }

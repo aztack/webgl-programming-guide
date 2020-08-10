@@ -1,19 +1,24 @@
-import { create3DContext, loadShader } from './utils';
+import { create3DContext } from './utils';
 import { OOWebGLObject } from './object';
 import { OOWebGLShader } from './shader';
 import { ShaderSource } from './types';
 import { OOProgram } from './program';
 import { OOBuffer } from './buffer';
 
+let contextUuid = 0;
 export class OOWebGL extends OOWebGLObject{
+  static bgColor = '#2196F3';
   canvas: HTMLCanvasElement;
-  constructor(canvas?: HTMLCanvasElement) {
+  name: string;
+  constructor(canvas?: HTMLCanvasElement, opts?: any) {
     super();
+    this.name = `context#${contextUuid++}`;
     if (!canvas) {
       canvas = document.createElement('canvas');
       document.body.appendChild(canvas);
     }
     this.canvas = canvas;
+    this.init(opts);
   }
 
   init(opts?: any): Promise<OOWebGL> {
@@ -52,11 +57,22 @@ export class OOWebGL extends OOWebGLObject{
     return ret;
   }
 
-  draw() {
+  clear(r: number = 0, g: number = 0, b: number = 0, a: number = 1, mask = this.ctx.COLOR_BUFFER_BIT) {
+    this.$debug(`clear`);
     const gl = this.ctx;
-    gl.clearColor(0.0, 0.0, 0.0, 1.0);
-    gl.clear(gl.COLOR_BUFFER_BIT);
-    //gl.drawArrays(gl.TRIANGLES, 0, ?)
+    gl.clearColor(r, g, b, a);
+    gl.clear(mask);
+  }
+
+  draw(mode: string = 'TRIANGLES', count: number, first: number = 0) {
+    this.$debug(`drawArrays(${mode}, ${first}, ${count})`);
+    const gl = this.ctx;
+    if (mode in gl) {
+      // @ts-ignore
+      gl.drawArrays(gl[mode], first, count);
+    } else {
+      throw new Error(`Invaid drawArrays mode: ${mode}`);
+    }
   }
 }
 

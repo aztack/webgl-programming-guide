@@ -15,7 +15,7 @@
       Please use a browser that supports "canvas"
     </canvas>
 </az-section>
-  <script type="module">
+  <!--script type="module">
     import { setupWebGL, createProgram } from '../lib/utils.mjs';
     setupWebGL(canvas)
       .then(gl => createProgram(gl, './index.vs', './index.fs', true))
@@ -23,7 +23,7 @@
         var a_Position = gl.getAttribLocation(gl.program, 'a_Position');
         var u_FragColor = gl.getUniformLocation(gl.program, 'u_FragColor');
 
-        
+
         gl.clearColor(0.0, 0.0, 0.0, 1.0);
         gl.clear(gl.COLOR_BUFFER_BIT);
 
@@ -35,6 +35,7 @@
         gl.vertexAttrib3f(a_Position, 0.5, 0, 0.0);
         gl.drawArrays(gl.POINTS, 0, 1);
       });
-  </script>
+  </script-->
+  <script src="./index.ts"></script>
 </body>
 </html>

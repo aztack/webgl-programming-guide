@@ -70,34 +70,3 @@ export function isArray(val: unknown) {
 }
 
 const minInterval = 1000 / 60;
-/**
- * Provides requestAnimationFrame and cancelAnimationFrame in a cross browser
- * way.
- */
-export const raf = (() => {
-  return window.requestAnimationFrame ||
-    window.webkitRequestAnimationFrame ||
-    // @ts-ignore
-    window.mozRequestAnimationFrame ||
-    // @ts-ignore
-    window.oRequestAnimationFrame ||
-    // @ts-ignore
-    window.msRequestAnimationFrame ||
-    function (callback) {
-      return window.setTimeout(callback, minInterval);
-    }
-})();
-
-export const caf = (() => {
-  return window.cancelAnimationFrame ||
-    window.webkitCancelAnimationFrame ||
-    // @ts-ignore
-    window.mozCancelAnimationFrame ||
-    // @ts-ignore
-    window.oCancelAnimationFrame ||
-    // @ts-ignore
-    window.msCancelAnimationFrame ||
-    function (id) {
-      return window.clearTimeout(id);
-    }
-})();

@@ -1,3 +1,4 @@
+import { DEBUG } from './flags';
 var OOWebGLObject = /** @class */ (function () {
     function OOWebGLObject() {
     }
@@ -9,10 +10,12 @@ var OOWebGLObject = /** @class */ (function () {
         for (var _i = 0; _i < arguments.length; _i++) {
             args[_i] = arguments[_i];
         }
-        //@ts-ignore
-        args.unshift("background:" + (this.constructor.bgColor || 'rgb(49,49,49)') + "; color: #fff;border-radius:2px");
-        args.unshift("%c[" + (this.name || this.constructor.name) + "]");
-        console.log.apply(console, args);
+        if (DEBUG) {
+            //@ts-ignore
+            args.unshift("background:" + (this.constructor.bgColor || 'rgb(49,49,49)') + "; color: #fff;border-radius:2px");
+            args.unshift("%c[" + (this.name || this.constructor.name) + "]");
+            console.log.apply(console, args);
+        }
     };
     return OOWebGLObject;
 }());

@@ -1,52 +1,17 @@
-import { __extends } from "tslib";
-import { OOWebGLObject } from "./object";
-import { isDefined } from "./utils";
-var OOBuffer = /** @class */ (function (_super) {
-    __extends(OOBuffer, _super);
-    function OOBuffer(ctx) {
-        var _this = _super.call(this) || this;
-        _this.init(ctx);
-        return _this;
-    }
-    OOBuffer.prototype.init = function (ctx) {
-        _super.prototype.init.call(this, ctx);
-        var buf = ctx.createBuffer();
-        this.$debug("buffer created", buf);
-        if (!buf) {
-            throw new Error("Create buffer failed!");
-        }
-        this.buffer = buf;
-        return this;
-    };
-    OOBuffer.prototype.bind = function (data, elePerVertext, attr) {
-        this.ensureCreated();
-        var gl = this.ctx;
-        gl.bindBuffer(gl.ARRAY_BUFFER, this.buffer);
-        this.$debug('buffer bound');
-        return this;
-    };
-    OOBuffer.prototype.data = function (data) {
-        this.ensureCreated();
-        var gl = this.ctx;
-        gl.bufferData(gl.ARRAY_BUFFER, data, gl.STATIC_DRAW);
-        this.$debug('buffer filled with data', data);
-        return this;
-    };
-    OOBuffer.prototype.attribute = function (attr, elePerVertex, type, normalized, stride, offset) {
-        this.ensureCreated();
-        var gl = this.ctx;
-        type = isDefined(type) ? type : gl.FLOAT;
-        normalized = isDefined(normalized) ? normalized : false;
-        stride = isDefined(stride) ? stride : 0;
-        offset = isDefined(offset) ? offset : 0;
-        gl.vertexAttribPointer(attr, elePerVertex, type, normalized, stride, offset);
-        gl.enableVertexAttribArray(attr);
-        return this;
-    };
-    OOBuffer.prototype.ensureCreated = function () {
-        if (!this.buffer)
-            this.init(this.ctx);
-    };
-    return OOBuffer;
-}(OOWebGLObject));
-export { OOBuffer };
+!function(t,e){if("object"==typeof exports&&"object"==typeof module)module.exports=e();else if("function"==typeof define&&define.amd)define([],e);else{var r=e();for(var n in r)("object"==typeof exports?exports:t)[n]=r[n]}}(window,(function(){return function(t){var e={};function r(n){if(e[n])return e[n].exports;var o=e[n]={i:n,l:!1,exports:{}};return t[n].call(o.exports,o,o.exports,r),o.l=!0,o.exports}return r.m=t,r.c=e,r.d=function(t,e,n){r.o(t,e)||Object.defineProperty(t,e,{enumerable:!0,get:n})},r.r=function(t){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(t,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(t,"__esModule",{value:!0})},r.t=function(t,e){if(1&e&&(t=r(t)),8&e)return t;if(4&e&&"object"==typeof t&&t&&t.__esModule)return t;var n=Object.create(null);if(r.r(n),Object.defineProperty(n,"default",{enumerable:!0,value:t}),2&e&&"string"!=typeof t)for(var o in t)r.d(n,o,function(e){return t[e]}.bind(null,o));return n},r.n=function(t){var e=t&&t.__esModule?function(){return t.default}:function(){return t};return r.d(e,"a",e),e},r.o=function(t,e){return Object.prototype.hasOwnProperty.call(t,e)},r.p="",r(r.s=4)}([function(t,e,r){"use strict";r.d(e,"b",(function(){return o})),r.d(e,"a",(function(){return i})),r.d(e,"c",(function(){return u}));
+/*! *****************************************************************************
+Copyright (c) Microsoft Corporation.
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+PERFORMANCE OF THIS SOFTWARE.
+***************************************************************************** */
+var n=function(t,e){return(n=Object.setPrototypeOf||{__proto__:[]}instanceof Array&&function(t,e){t.__proto__=e}||function(t,e){for(var r in e)e.hasOwnProperty(r)&&(t[r]=e[r])})(t,e)};function o(t,e){function r(){this.constructor=t}n(t,e),t.prototype=null===e?Object.create(e):(r.prototype=e.prototype,new r)}var i=function(){return(i=Object.assign||function(t){for(var e,r=1,n=arguments.length;r<n;r++)for(var o in e=arguments[r])Object.prototype.hasOwnProperty.call(e,o)&&(t[o]=e[o]);return t}).apply(this,arguments)};function u(){for(var t=0,e=0,r=arguments.length;e<r;e++)t+=arguments[e].length;var n=Array(t),o=0;for(e=0;e<r;e++)for(var i=arguments[e],u=0,f=i.length;u<f;u++,o++)n[o]=i[u];return n}},function(t,e,r){"use strict";r.r(e),r.d(e,"OOWebGLObject",(function(){return n}));var n=function(){function t(){}return t.prototype.init=function(t){this.ctx=t},t.prototype.$debug=function(){for(var t=[],e=0;e<arguments.length;e++)t[e]=arguments[e]},t}()},function(t,e,r){"use strict";r.r(e),r.d(e,"create3DContext",(function(){return o})),r.d(e,"fetchShader",(function(){return u})),r.d(e,"loadShader",(function(){return f})),r.d(e,"isInteger",(function(){return c})),r.d(e,"isDefined",(function(){return a})),r.d(e,"isArray",(function(){return s}));var n=["webgl2","webgl","experimental-webgl","webkit-3d","moz-webgl"];function o(t,e){for(var r=null,o=0;o<n.length;o++){try{r=t.getContext(n[o],e)}catch(t){}if(r)break}if(!r)throw new Error("Create 3D context failed, your browser does not support WebGL!");return r}var i=/\s*void\s+main\(\s*\)/;function u(t){if(t instanceof HTMLScriptElement){if(t.textContent)return Promise.resolve(t.textContent)}else if("string"==typeof t)return t.match(i)?Promise.resolve(t):fetch(t).then((function(t){return t.text()}));return Promise.reject(new Error("Failed to fetch shader"))}function f(t,e,r){return u(e).then((function(e){var n=t.createShader(r);if(!n)throw new Error("Create shader failed!");if(t.shaderSource(n,e),t.compileShader(n),!t.getShaderParameter(n,t.COMPILE_STATUS)){var o=r===t.VERTEX_SHADER?"vertex":"fragment",i=t.getShaderInfoLog(n),u=new Error("Failed to compile "+o+" shader:\n"+i+"\nSOURCE:\n"+e);throw t.deleteShader(n),u}return{code:e,shader:n}}))}var c=Number.isInteger||function(t){return"number"==typeof t&&isFinite(t)&&Math.floor(t)===t};function a(t){return void 0!==t}function s(t){return Array.isArray?Array.isArray(t):"[object Array]"===Object.prototype.toString.call(t)}},,function(t,e,r){"use strict";r.r(e),r.d(e,"OOBuffer",(function(){return u}));var n=r(0),o=r(1),i=r(2),u=function(t){function e(e){var r=t.call(this)||this;return r.init(e),r}return Object(n.b)(e,t),e.prototype.init=function(e){t.prototype.init.call(this,e);var r=e.createBuffer();if(this.$debug("buffer created",r),!r)throw new Error("Create buffer failed!");return this.buffer=r,this},e.prototype.bind=function(t,e,r){this.ensureCreated();var n=this.ctx;return n.bindBuffer(n.ARRAY_BUFFER,this.buffer),this.$debug("buffer bound"),this},e.prototype.data=function(t){this.ensureCreated();var e=this.ctx;return e.bufferData(e.ARRAY_BUFFER,t,e.STATIC_DRAW),this.$debug("buffer filled with data",t),this},e.prototype.attribute=function(t,e,r,n,o,u){this.ensureCreated();var f=this.ctx;return r=Object(i.isDefined)(r)?r:f.FLOAT,n=!!Object(i.isDefined)(n)&&n,o=Object(i.isDefined)(o)?o:0,u=Object(i.isDefined)(u)?u:0,f.vertexAttribPointer(t,e,r,n,o,u),f.enableVertexAttribArray(t),this},e.prototype.ensureCreated=function(){this.buffer||this.init(this.ctx)},e}(o.OOWebGLObject)}])}));
+//# sourceMappingURL=buffer.js.map

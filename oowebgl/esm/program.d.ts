@@ -14,8 +14,8 @@ export declare class OOProgram extends OOWebGLObject {
     use(): OOProgram;
     attachShaders(...shaders: OOWebGLShader[]): this;
     deleteShaders(): this;
-    link(...shaders: OOWebGLShader[]): Promise<unknown>;
-    linkAndUse(...shaders: OOWebGLShader[]): Promise<OOProgram>;
+    link(): Promise<unknown>;
+    linkAndUse(): Promise<OOProgram>;
     getParameter(name: number): any;
     get stat(): Record<string, any>;
     get linkStatus(): any;

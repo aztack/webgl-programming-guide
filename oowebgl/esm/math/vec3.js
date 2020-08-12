@@ -9,3 +9,4 @@ var Vec3 = /** @class */ (function (_super) {
     return Vec3;
 }(Array));
 export { Vec3 };
+//# sourceMappingURL=vec3.js.map

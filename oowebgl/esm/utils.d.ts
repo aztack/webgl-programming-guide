@@ -14,3 +14,10 @@ export declare function loadShader(gl: WebGLContext, source: ShaderSource, type:
 export declare const isInteger: (number: unknown) => boolean;
 export declare function isDefined(val: unknown): boolean;
 export declare function isArray(val: unknown): boolean;
+/**
+ * Provides requestAnimationFrame and cancelAnimationFrame in a cross browser
+ * way.
+ */
+export declare const raf: ((callback: FrameRequestCallback) => number) & typeof requestAnimationFrame;
+export declare const caf: ((handle: number) => void) & typeof cancelAnimationFrame;
+export declare let DEBUG: boolean;

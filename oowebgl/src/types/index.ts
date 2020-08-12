@@ -2,9 +2,8 @@ export type WebGLContext = WebGLRenderingContext | WebGL2RenderingContext;
 export type URLString = string;
 export type ShaderSource = URLString | HTMLScriptElement
 
-type FixedSizeArray<N extends number, T, M extends string = '0'> = {
+type FixedSizeArray<N extends number, T> = {
   length: N;
-  readonly [k in M]: any;
 } & ReadonlyArray<T>;
 
 

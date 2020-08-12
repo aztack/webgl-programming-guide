@@ -18,7 +18,7 @@ var OOBuffer = /** @class */ (function (_super) {
         this.buffer = buf;
         return this;
     };
-    OOBuffer.prototype.bind = function (data, elePerVertext, attr) {
+    OOBuffer.prototype.bind = function () {
         this.ensureCreated();
         var gl = this.ctx;
         gl.bindBuffer(gl.ARRAY_BUFFER, this.buffer);
@@ -50,3 +50,4 @@ var OOBuffer = /** @class */ (function (_super) {
     return OOBuffer;
 }(OOWebGLObject));
 export { OOBuffer };
+//# sourceMappingURL=buffer.js.map

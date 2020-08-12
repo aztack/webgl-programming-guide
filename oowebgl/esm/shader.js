@@ -32,3 +32,4 @@ var OOWebGLShader = /** @class */ (function (_super) {
     return OOWebGLShader;
 }(OOWebGLObject));
 export { OOWebGLShader };
+//# sourceMappingURL=shader.js.map

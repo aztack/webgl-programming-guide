@@ -1,4 +1,4 @@
-import { __assign, __extends } from "tslib";
+import { __assign, __extends, __read, __spread } from "tslib";
 import { OOWebGLObject } from './object';
 import { OOWebGLShader } from './shader';
 var programUuid = 0;
@@ -20,7 +20,7 @@ var OOProgram = /** @class */ (function (_super) {
             OOWebGLShader.createVertextShader(ctx, vss),
             OOWebGLShader.createFragmentShader(ctx, fss)
         ]).then(function (shaders) {
-            prog.attachShaders.apply(prog, shaders);
+            prog.attachShaders.apply(prog, __spread(shaders));
             return prog;
         });
     };
@@ -62,10 +62,6 @@ var OOProgram = /** @class */ (function (_super) {
     };
     OOProgram.prototype.link = function () {
         var _this = this;
-        var shaders = [];
-        for (var _i = 0; _i < arguments.length; _i++) {
-            shaders[_i] = arguments[_i];
-        }
         this.ensureCreated();
         this.ctx.linkProgram(this.program);
         return new Promise(function (resolve, reject) {
@@ -80,11 +76,7 @@ var OOProgram = /** @class */ (function (_super) {
     };
     OOProgram.prototype.linkAndUse = function () {
         var _this = this;
-        var shaders = [];
-        for (var _i = 0; _i < arguments.length; _i++) {
-            shaders[_i] = arguments[_i];
-        }
-        return this.link.apply(this, shaders).then(function () { return _this.use(); });
+        return this.link().then(function () { return _this.use(); });
     };
     OOProgram.prototype.getParameter = function (name) {
         return this.ctx.getProgramParameter(this.program, name);
@@ -249,3 +241,4 @@ var OOProgram = /** @class */ (function (_super) {
     return OOProgram;
 }(OOWebGLObject));
 export { OOProgram };
+//# sourceMappingURL=program.js.map

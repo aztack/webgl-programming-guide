@@ -20,7 +20,7 @@ export class OOBuffer extends OOWebGLObject {
   }
 
 
-  bind(data: BufferSource, elePerVertext: number, attr: number) {
+  bind() {
     this.ensureCreated();
     const gl = this.ctx;
     gl.bindBuffer(gl.ARRAY_BUFFER, this.buffer);

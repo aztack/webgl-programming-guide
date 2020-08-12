@@ -1,4 +1,4 @@
-import { __extends, __spreadArrays } from "tslib";
+import { __extends, __read, __spread } from "tslib";
 import parseColor from 'parse-color';
 import convert from 'color-convert';
 import { Vec4 } from './math/vec4';
@@ -39,7 +39,7 @@ var Color = /** @class */ (function (_super) {
             args[_i] = arguments[_i];
         }
         // @ts-ignore
-        return new (Color.bind.apply(Color, __spreadArrays([void 0], args)))();
+        return new (Color.bind.apply(Color, __spread([void 0], args)))();
     };
     Object.defineProperty(Color.prototype, "r", {
         get: function () {
@@ -876,3 +876,4 @@ function copy(target, src) {
             target[i] /= 255;
     }
 }
+//# sourceMappingURL=color.js.map

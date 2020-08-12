@@ -1,4 +1,5 @@
-import { DEBUG } from './flags';
+import { __read, __spread } from "tslib";
+import { DEBUG } from "./utils";
 var OOWebGLObject = /** @class */ (function () {
     function OOWebGLObject() {
     }
@@ -14,9 +15,10 @@ var OOWebGLObject = /** @class */ (function () {
             //@ts-ignore
             args.unshift("background:" + (this.constructor.bgColor || 'rgb(49,49,49)') + "; color: #fff;border-radius:2px");
             args.unshift("%c[" + (this.name || this.constructor.name) + "]");
-            console.log.apply(console, args);
+            console.log.apply(console, __spread(args));
         }
     };
     return OOWebGLObject;
 }());
 export { OOWebGLObject };
+//# sourceMappingURL=object.js.map

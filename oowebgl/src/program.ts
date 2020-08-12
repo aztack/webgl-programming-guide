@@ -1,7 +1,6 @@
 import { OOWebGLObject } from './object';
 import { WebGLContext, ShaderSource } from './types';
 import { OOWebGLShader } from './shader';
-import { isInteger } from './utils';
 
 let programUuid = 0;
 
@@ -65,7 +64,7 @@ export class OOProgram extends OOWebGLObject {
     return this;
   }
 
-  link(...shaders: OOWebGLShader[]) {
+  link() {
     this.ensureCreated();
     this.ctx.linkProgram(this.program);
     return new Promise((resolve, reject) => {
@@ -78,8 +77,8 @@ export class OOProgram extends OOWebGLObject {
     });
   }
 
-  linkAndUse(...shaders: OOWebGLShader[]) {
-    return this.link(...shaders).then(() => this.use());
+  linkAndUse() {
+    return this.link().then(() => this.use());
   }
 
   getParameter(name: number) {

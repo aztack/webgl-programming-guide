@@ -1,5 +1,6 @@
 {
   "devDependencies": {
+    "declaration-bundler-webpack-plugin": "^1.0.3",
     "parcel-bundler": "^1.12.4",
     "typescript": "^3.9.7"
   },
@@ -10,9 +11,9 @@
   },
   "scripts": {
     "watch": "cd oowebgl && tsc --watch",
-    "ch02": "parcel src/ch02.points/index.html",
-    "ch03": "parcel src/ch03.triangle/index.html",
-    "ch05": "parcel src/ch05.texture/index.html"
+    "ch02": "parcel src/ch02.points/index.html src/ch02.points/**/*.{vs,fs} --open",
+    "ch03": "parcel src/ch03.triangle/index.html src/ch03.triangle/**/*.{vs,fs} --open",
+    "ch05": "parcel src/ch05.texture/index.html src/ch05.texture/**/*.{vs,fs} --open"
   },
   "repository": {
     "type": "git",

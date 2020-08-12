@@ -1,10 +1,10 @@
-import { OOWebGL, Color } from '../../oowebgl/dist/oowebgl';
+import { OOWebGL, Color } from '../../oowebgl/esm/oowebgl';
 (async () => {
   const canvas = document.getElementById('canvas') as HTMLCanvasElement;
   const owgl = new OOWebGL(canvas);
   const shaders = [
     await owgl.createVertextShader(`./index.vs`),
-    await owgl.createFragmentShader(`./index.fs`.trim())
+    await owgl.createFragmentShader(`./index.fs`)
   ];
 
   // @ts-ignore

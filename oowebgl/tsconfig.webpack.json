@@ -1,12 +1,11 @@
 {
   "extends": "./config/tsconfig.base.json",
   "compilerOptions": {
-    "module": "es2015",
     "lib": [
       "es2016",
       "dom"
     ],
-    "declaration": true,
-    "outDir": "./esm"
+    "outDir": "./dist",
+    "allowUmdGlobalAccess": true
   }
 }

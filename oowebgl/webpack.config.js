@@ -1,6 +1,5 @@
 const path = require('path');
 const webpack = require('webpack');
-var DeclarationBundlerPlugin = require('declaration-bundler-webpack-plugin');
 const glob = require('glob');
 
 const sources = glob.sync('./src/**/*.ts').filter(f => f.indexOf('.d.ts') <  0)
@@ -10,33 +9,30 @@ const entry = sources.reduce((all, file) => {
     return all;
   }, {});
 
-const decl = sources.map((file) => {
-  const moduleName = path.basename(file, path.extname(file));
-  return {
-    moduleName,
-    out: `./dist/${moduleName}.d.ts`
-  };
-}, {});
-
-const configFileName = path.resolve(__dirname, './tsconfig.json')
-console.log(`Using ${configFileName}`);
 console.log(entry);
 module.exports = {
   mode: process.env.NODE_ENV !== 'production' ? 'development' : 'production',
-  entry,
+  entry: {
+    oowebgl: './src/oowebgl.ts'
+  },
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].js',
-    libraryTarget: 'umd'
+    library: 'oowebgl'
   },
   resolve: {
-    extensions: ['.js', '.ts', '.json']
+    extensions: ['.js', '.ts']
   },
   devtool: 'source-map',
   module: {
     rules: [{
       test: /\.ts$/,
-      loader: `ts-loader`
+      use: [{
+        loader: `ts-loader`,
+        options: {
+          configFile: path.resolve(__dirname, './tsconfig.webpack.json')
+        }
+      }]
     }]
   },
   plugins: [

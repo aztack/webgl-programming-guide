@@ -3,11 +3,12 @@
   "version": "1.0.0",
   "description": "A Simple Object-Oriented WebGL Library",
   "main": "dist/oowebgl.js",
+  "module": "esm/oowebgl.js",
+  "unpkg": "dist/oowebgl.js",
   "scripts": {
-    "tsc": "tsc",
+    "tsc-build": "tsc --build",
     "tsc-watch": "tsc --watch",
-    "watch": "export NODE_ENV=development && webpack --watch",
-    "release": "export NODE_ENV=production && webpack --config webpack.config.js"
+    "webpack-build": "export NODE_ENV=production && webpack --config webpack.config.js"
   },
   "keywords": [
     "WebGL"
@@ -20,8 +21,10 @@
   "devDependencies": {
     "@types/color-convert": "^1.9.0",
     "@types/parse-color": "^1.0.0",
+    "declaration-bundler-webpack-plugin": "^1.0.3",
     "glob": "^7.1.6",
     "ts-loader": "^8.0.2",
+    "typescript": "^3.9.7",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12"
   }

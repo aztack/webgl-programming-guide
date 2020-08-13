@@ -1,11 +1,13 @@
 import { OOWebGLObject } from './object';
 import { WebGLContext, ShaderSource } from './types';
 import { OOWebGLShader } from './shader';
+import { OOWebGL } from './context';
 
 let programUuid = 0;
 
 export class OOProgram extends OOWebGLObject {
   static bgColor = '#4CAF50';
+  octx!: OOWebGL;
   program!: WebGLProgram;
   shaders: OOWebGLShader[] = [];
   attributes: Record<string, number> = {};
@@ -41,6 +43,7 @@ export class OOProgram extends OOWebGLObject {
 
   use(): OOProgram {
     this.$debug(`use ${this.name}`);
+    this.octx.currentProgram = this;
     this.ctx.useProgram(this.program);
     return this;
   }

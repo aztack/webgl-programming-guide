@@ -1,15 +1,18 @@
-import { create3DContext } from './utils';
+import { create3DContext, isDefined } from './utils';
 import { OOWebGLObject } from './object';
 import { OOWebGLShader } from './shader';
 import { ShaderSource } from './types';
 import { OOProgram } from './program';
 import { OOBuffer } from './buffer';
+import { Color } from './color';
+import { OOTexture } from './texture';
 
 let contextUuid = 0;
 export class OOWebGL extends OOWebGLObject{
   static bgColor = '#2196F3';
   canvas: HTMLCanvasElement;
   name: string;
+  currentProgram: OOProgram | null = null;
   constructor(canvas?: HTMLCanvasElement, opts?: any) {
     super();
     this.name = `context#${contextUuid++}`;
@@ -30,10 +33,14 @@ export class OOWebGL extends OOWebGLObject{
   }
 
   createProgram(vss?: ShaderSource, fss?: ShaderSource) {
-    return OOProgram.create(this.ctx, vss, fss);
+    return OOProgram.create(this.ctx, vss, fss).then(prog => {
+      prog.octx = this;
+      return prog;
+    });
   }
 
   useProgram(prog: OOProgram) {
+    this.currentProgram = prog;
     return this.ctx.useProgram(prog.program);
   }
 
@@ -51,17 +58,43 @@ export class OOWebGL extends OOWebGLObject{
     });
   }
 
-  createBuffer(data: BufferSource, attr?: number, elePerVertex?: number) {
+  createBuffer(data: BufferSource, attr: number | string, elePerVertex?: number, type?: number, normalized?: boolean, stride?: number, offset?: number): OOBuffer {
+    let attrLoc: number;
+    if (typeof attr === 'string') {
+      attrLoc = this.currentProgram!.getAttribute(attr);
+    } else {
+      attrLoc = attr;
+    }
     const ret = new OOBuffer(this.ctx).data(data);
-    if (attr && elePerVertex) ret.attribute(attr, elePerVertex);
+    if (attr && elePerVertex) ret.attribute(attrLoc, elePerVertex, type, normalized, stride, offset);
     return ret;
   }
 
-  clear(r: number = 0, g: number = 0, b: number = 0, a: number = 1, mask = this.ctx.COLOR_BUFFER_BIT) {
+  createTexture(sampler: WebGLUniformLocation, img: HTMLImageElement, texture?: OOTexture): OOTexture {
+    const tex = texture || new OOTexture();
+    tex.init(this.ctx);
+    tex.bind(sampler, img);
+    return tex;
+  }
+
+  clear(): OOWebGL;
+  clear(color: Color , mask: number): OOWebGL;
+  clear(r: number, g: number, b: number, a: number, mask:number): OOWebGL;
+  clear(r?: any, g?: any, b?: number, a?: number, mask?: number): OOWebGL {
     this.$debug(`clear`);
     const gl = this.ctx;
-    gl.clearColor(r, g, b, a);
-    gl.clear(mask);
+    if (arguments.length === 0) {
+      gl.clearColor(0, 0, 0, 1);
+    } else {
+      if (r instanceof Color) {
+        gl.clearColor(...r.vec4);
+      } else {
+        gl.clearColor(r, g, b!, a!);
+      }
+    }
+    if (!isDefined(mask)) mask = gl.COLOR_BUFFER_BIT;
+    gl.clear(mask!);
+    return this;
   }
 
   draw(mode: string = 'TRIANGLES', count: number, first: number = 0) {

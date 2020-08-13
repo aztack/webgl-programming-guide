@@ -65,7 +65,7 @@ export class OOWebGL extends OOWebGLObject{
     } else {
       attrLoc = attr;
     }
-    const ret = new OOBuffer(this.ctx).data(data);
+    const ret = new OOBuffer().init(this.ctx).data(data);
     if (attr && elePerVertex) ret.attribute(attrLoc, elePerVertex, type, normalized, stride, offset);
     return ret;
   }

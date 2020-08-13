@@ -2,13 +2,15 @@ import { OOWebGLObject } from "./object";
 import { WebGLContext } from "./types";
 import { isDefined } from "./utils";
 
+let bufferId = 0;
 export class OOBuffer extends OOWebGLObject {
   buffer!: WebGLBuffer;
   bound: boolean = false;
-  constructor(ctx: WebGLContext) {
+  constructor() {
     super();
-    this.init(ctx);
+    this.name = `buffer#${bufferId++}`;
   }
+
   init(ctx: WebGLContext) {
     super.init(ctx);
     const buf = ctx.createBuffer();
@@ -19,7 +21,6 @@ export class OOBuffer extends OOWebGLObject {
     this.buffer = buf;
     return this;
   }
-
 
   bind() {
     this.ensureCreated();

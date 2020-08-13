@@ -1,4 +1,3 @@
-export declare const OO_DEBUG: boolean;
 export declare type WebGLContext = WebGLRenderingContext | WebGL2RenderingContext;
 export declare type URLString = string;
 export declare type ShaderSource = URLString | HTMLScriptElement;

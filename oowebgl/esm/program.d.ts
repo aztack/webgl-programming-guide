@@ -1,8 +1,10 @@
 import { OOWebGLObject } from './object';
 import { WebGLContext, ShaderSource } from './types';
 import { OOWebGLShader } from './shader';
+import { OOWebGL } from './context';
 export declare class OOProgram extends OOWebGLObject {
     static bgColor: string;
+    octx: OOWebGL;
     program: WebGLProgram;
     shaders: OOWebGLShader[];
     attributes: Record<string, number>;

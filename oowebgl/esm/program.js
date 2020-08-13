@@ -35,6 +35,7 @@ var OOProgram = /** @class */ (function (_super) {
     };
     OOProgram.prototype.use = function () {
         this.$debug("use " + this.name);
+        this.octx.currentProgram = this;
         this.ctx.useProgram(this.program);
         return this;
     };

@@ -96,5 +96,5 @@ export var caf = (function () {
             return window.clearTimeout(id);
         };
 })();
-export var DEBUG = false;
+export var DEBUG = true;
 //# sourceMappingURL=utils.js.map

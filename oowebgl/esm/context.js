@@ -1,14 +1,17 @@
-import { __extends } from "tslib";
-import { create3DContext } from './utils';
+import { __extends, __read, __spread } from "tslib";
+import { create3DContext, isDefined } from './utils';
 import { OOWebGLObject } from './object';
 import { OOWebGLShader } from './shader';
 import { OOProgram } from './program';
 import { OOBuffer } from './buffer';
+import { Color } from './color';
+import { OOTexture } from './texture';
 var contextUuid = 0;
 var OOWebGL = /** @class */ (function (_super) {
     __extends(OOWebGL, _super);
     function OOWebGL(canvas, opts) {
         var _this = _super.call(this) || this;
+        _this.currentProgram = null;
         _this.name = "context#" + contextUuid++;
         if (!canvas) {
             canvas = document.createElement('canvas');
@@ -27,9 +30,14 @@ var OOWebGL = /** @class */ (function (_super) {
         });
     };
     OOWebGL.prototype.createProgram = function (vss, fss) {
-        return OOProgram.create(this.ctx, vss, fss);
+        var _this = this;
+        return OOProgram.create(this.ctx, vss, fss).then(function (prog) {
+            prog.octx = _this;
+            return prog;
+        });
     };
     OOWebGL.prototype.useProgram = function (prog) {
+        this.currentProgram = prog;
         return this.ctx.useProgram(prog.program);
     };
     OOWebGL.prototype.createVertextShader = function (source, name) {
@@ -46,22 +54,43 @@ var OOWebGL = /** @class */ (function (_super) {
             return shader;
         });
     };
-    OOWebGL.prototype.createBuffer = function (data, attr, elePerVertex) {
+    OOWebGL.prototype.createBuffer = function (data, attr, elePerVertex, type, normalized, stride, offset) {
+        var attrLoc;
+        if (typeof attr === 'string') {
+            attrLoc = this.currentProgram.getAttribute(attr);
+        }
+        else {
+            attrLoc = attr;
+        }
         var ret = new OOBuffer(this.ctx).data(data);
         if (attr && elePerVertex)
-            ret.attribute(attr, elePerVertex);
+            ret.attribute(attrLoc, elePerVertex, type, normalized, stride, offset);
         return ret;
     };
+    OOWebGL.prototype.createTexture = function (sampler, img, texture) {
+        var tex = texture || new OOTexture();
+        tex.init(this.ctx);
+        tex.bind(sampler, img);
+        return tex;
+    };
     OOWebGL.prototype.clear = function (r, g, b, a, mask) {
-        if (r === void 0) { r = 0; }
-        if (g === void 0) { g = 0; }
-        if (b === void 0) { b = 0; }
-        if (a === void 0) { a = 1; }
-        if (mask === void 0) { mask = this.ctx.COLOR_BUFFER_BIT; }
         this.$debug("clear");
         var gl = this.ctx;
-        gl.clearColor(r, g, b, a);
+        if (arguments.length === 0) {
+            gl.clearColor(0, 0, 0, 1);
+        }
+        else {
+            if (r instanceof Color) {
+                gl.clearColor.apply(gl, __spread(r.vec4));
+            }
+            else {
+                gl.clearColor(r, g, b, a);
+            }
+        }
+        if (!isDefined(mask))
+            mask = gl.COLOR_BUFFER_BIT;
         gl.clear(mask);
+        return this;
     };
     OOWebGL.prototype.draw = function (mode, count, first) {
         if (mode === void 0) { mode = 'TRIANGLES'; }

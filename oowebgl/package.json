@@ -16,6 +16,8 @@
   "author": "aztack@163.com",
   "license": "ISC",
   "dependencies": {
+    "@types/events": "^3.0.0",
+    "events": "^3.2.0",
     "parse-color": "^1.0.0"
   },
   "devDependencies": {

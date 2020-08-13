@@ -5,6 +5,7 @@ var OOBuffer = /** @class */ (function (_super) {
     __extends(OOBuffer, _super);
     function OOBuffer(ctx) {
         var _this = _super.call(this) || this;
+        _this.bound = false;
         _this.init(ctx);
         return _this;
     }
@@ -22,11 +23,13 @@ var OOBuffer = /** @class */ (function (_super) {
         this.ensureCreated();
         var gl = this.ctx;
         gl.bindBuffer(gl.ARRAY_BUFFER, this.buffer);
+        this.bound = true;
         this.$debug('buffer bound');
         return this;
     };
     OOBuffer.prototype.data = function (data) {
         this.ensureCreated();
+        this.ensureBind();
         var gl = this.ctx;
         gl.bufferData(gl.ARRAY_BUFFER, data, gl.STATIC_DRAW);
         this.$debug('buffer filled with data', data);
@@ -46,6 +49,10 @@ var OOBuffer = /** @class */ (function (_super) {
     OOBuffer.prototype.ensureCreated = function () {
         if (!this.buffer)
             this.init(this.ctx);
+    };
+    OOBuffer.prototype.ensureBind = function () {
+        if (!this.bound)
+            this.bind();
     };
     return OOBuffer;
 }(OOWebGLObject));

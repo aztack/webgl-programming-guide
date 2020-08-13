@@ -3,7 +3,7 @@ import { WebGLContext } from "./types";
 export declare class OOBuffer extends OOWebGLObject {
     buffer: WebGLBuffer;
     bound: boolean;
-    constructor(ctx: WebGLContext);
+    constructor();
     init(ctx: WebGLContext): this;
     bind(): this;
     data(data: BufferSource): this;

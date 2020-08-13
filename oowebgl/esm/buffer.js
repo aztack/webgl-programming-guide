@@ -1,12 +1,13 @@
 import { __extends } from "tslib";
 import { OOWebGLObject } from "./object";
 import { isDefined } from "./utils";
+var bufferId = 0;
 var OOBuffer = /** @class */ (function (_super) {
     __extends(OOBuffer, _super);
-    function OOBuffer(ctx) {
+    function OOBuffer() {
         var _this = _super.call(this) || this;
         _this.bound = false;
-        _this.init(ctx);
+        _this.name = "buffer#" + bufferId++;
         return _this;
     }
     OOBuffer.prototype.init = function (ctx) {

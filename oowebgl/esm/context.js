@@ -62,7 +62,7 @@ var OOWebGL = /** @class */ (function (_super) {
         else {
             attrLoc = attr;
         }
-        var ret = new OOBuffer(this.ctx).data(data);
+        var ret = new OOBuffer().init(this.ctx).data(data);
         if (attr && elePerVertex)
             ret.attribute(attrLoc, elePerVertex, type, normalized, stride, offset);
         return ret;

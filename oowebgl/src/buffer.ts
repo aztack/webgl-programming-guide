@@ -4,6 +4,7 @@ import { isDefined } from "./utils";
 
 export class OOBuffer extends OOWebGLObject {
   buffer!: WebGLBuffer;
+  bound: boolean = false;
   constructor(ctx: WebGLContext) {
     super();
     this.init(ctx);
@@ -24,12 +25,14 @@ export class OOBuffer extends OOWebGLObject {
     this.ensureCreated();
     const gl = this.ctx;
     gl.bindBuffer(gl.ARRAY_BUFFER, this.buffer);
+    this.bound = true;
     this.$debug('buffer bound');
     return this;
   }
 
   data(data: BufferSource) {
     this.ensureCreated();
+    this.ensureBind();
     const gl = this.ctx;
     gl.bufferData(gl.ARRAY_BUFFER, data, gl.STATIC_DRAW);
     this.$debug('buffer filled with data', data);
@@ -50,5 +53,9 @@ export class OOBuffer extends OOWebGLObject {
 
   ensureCreated() {
     if (!this.buffer) this.init(this.ctx);
+  }
+
+  ensureBind() {
+    if (!this.bound) this.bind();
   }
 }

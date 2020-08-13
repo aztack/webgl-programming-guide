@@ -1,6 +1,6 @@
 import { setupWebGL, createProgram, initBuffer, raf, caf } from '../lib/utils.mjs';
 setupWebGL(canvas)
-  .then(gl => createProgram(gl, './index.vs', './index.fs', true))
+  .then(gl => createProgram(gl, './ch03.vs', './ch03.fs', true))
   .then(gl => {
     const n = initVertices(gl);
     // gl.vertexAttrib3f(a_Position, 0.5, 0, 0.0);

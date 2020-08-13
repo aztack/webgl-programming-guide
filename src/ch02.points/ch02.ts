@@ -3,8 +3,8 @@ import { OOWebGL, Color } from '../../oowebgl/esm/oowebgl';
   const canvas = document.getElementById('canvas') as HTMLCanvasElement;
   const owgl = new OOWebGL(canvas);
   const shaders = [
-    await owgl.createVertextShader(`./index.vs`),
-    await owgl.createFragmentShader(`./index.fs`)
+    await owgl.createVertextShader(`/ch02.vs`),
+    await owgl.createFragmentShader(`/ch02.fs`)
   ];
 
   // @ts-ignore

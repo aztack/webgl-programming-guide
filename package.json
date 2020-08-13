@@ -2,6 +2,7 @@
   "devDependencies": {
     "declaration-bundler-webpack-plugin": "^1.0.3",
     "parcel-bundler": "^1.12.4",
+    "parcel-plugin-static-files-copy": "^2.5.0",
     "typescript": "^3.9.7"
   },
   "name": "webgl-programming-guide",
@@ -11,14 +12,18 @@
   },
   "scripts": {
     "watch": "cd oowebgl && tsc --watch",
-    "ch02": "parcel src/ch02.points/index.html src/ch02.points/**/*.{vs,fs} --open",
-    "ch03": "parcel src/ch03.triangle/index.html src/ch03.triangle/**/*.{vs,fs} --open",
-    "ch05": "parcel src/ch05.texture/index.html src/ch05.texture/**/*.{vs,fs} --open"
+    "ch02": "parcel src/ch02.points/ch02.html --open",
+    "ch03": "parcel src/ch03.triangle/ch03.html --open",
+    "ch05": "parcel src/ch05.texture/ch05.html --open"
   },
   "repository": {
     "type": "git",
     "url": "gogs@aztack.wang:aztack/webgl-programming-guide"
   },
   "author": "aztack@163.com",
-  "license": "ISC"
+  "license": "ISC",
+  "staticFiles": {
+    "staticPath": "oowebgl/esm",
+    "watcherGlob": "*.map"
+}
 }

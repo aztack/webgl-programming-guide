@@ -1,6 +1,7 @@
+window.parcelRequire = null;
 import { setupWebGL, createProgram, initBuffer, initTexture } from '../lib/utils.mjs';
 setupWebGL(canvas)
-  .then(gl => createProgram(gl, './index.vs', './index.fs', true))
+  .then(gl => createProgram(gl, './ch05.vs', './ch05.fs', true))
   .then(init);
 
 function init(gl) {

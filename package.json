@@ -22,8 +22,12 @@
   },
   "author": "aztack@163.com",
   "license": "ISC",
-  "staticFiles": {
+  "staticFiles": [{
     "staticPath": "oowebgl/esm",
-    "watcherGlob": "*.map"
-}
+    "watcherGlob": "*.map",
+    "staticOutDir": "dist"
+  }, {
+    "staticPath": "static",
+    "staticOutDir": "dist"
+  }]
 }

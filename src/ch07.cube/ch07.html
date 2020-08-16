@@ -3,26 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>05.texture</title>
+  <title>07.cube</title>
   <link rel="stylesheet" href="https://unpkg.com/aztec-ui@0.0.5/dist/aztec-ui/aztec-ui.css" />
   <script src="https://unpkg.com/aztec-ui@0.0.5/dist/aztec-ui/aztec-ui.js"></script>
-  <script src="/cuon-matrix.js"></script>
 </head>
 <body class="aztec-app">
-  <image id="img" style="display: none;" src="/sky.jpg"></image>
-  <az-panel caption="Texture">
+  <az-panel caption="Cube">
     <canvas id="canvas" width="400" height="400" style="align-self: flex-start">
       Please use a browser that supports "canvas"
     </canvas>
     <br/>
-    <label for="offsetX">Offset X
-      <az-slider caption="X" id="offsetX"></az-slider>
-    </label>
-    <label for="offsetX">Offset Y
-      <az-slider caption="Y" id="offsetY"></az-slider>
-    </label>
-    <az-checkbox caption="clamp" id="clamp"></az-checkbox>
-    <az-toolbar>
-  <script type="module" src="./ch05.ts"></script>
+  <script type="module" src="./ch07.ts"></script>
 </body>
 </html>

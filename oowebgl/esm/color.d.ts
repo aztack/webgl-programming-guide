@@ -16,7 +16,7 @@ export declare class Color extends Vec4 {
     constructor(color: string);
     constructor(color: Array<number>);
     constructor(color: Color);
-    valueOf(): number;
+    value(): number;
     toString(format?: 'rgb' | 'rgba' | 'hex' | 'hsl'): string;
     get vec3(): [number, number, number];
     get vec4(): [number, number, number, number];

@@ -24,4 +24,11 @@ export class OOTexture extends OOWebGLObject {
     gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, image);
     gl.uniform1i(sampler, 0);
   }
+
+  parameteri(name: number, value: number | string, target?: number): OOTexture {
+    const gl = this.ctx;
+    // @ts-ignore
+    gl.texParameteri(target || gl.TEXTURE_2D, name, typeof value === 'number' ? value : gl[value]);
+    return this;
+  }
 }

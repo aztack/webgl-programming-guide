@@ -14,11 +14,11 @@ var Color = /** @class */ (function (_super) {
         }
         else {
             if (!color) {
-                copy(_this, Color.BLACK);
+                copy(_this, Color.BLACK.vec4);
             }
             else {
                 if (typeof color === 'string') {
-                    copy(parseColor(color).rgba, _this);
+                    copy(parseColor(color).rgba, _this.vec4);
                 }
                 else if (color.length) {
                     copy(_this, color);
@@ -81,7 +81,7 @@ var Color = /** @class */ (function (_super) {
         enumerable: false,
         configurable: true
     });
-    Color.prototype.valueOf = function () {
+    Color.prototype.value = function () {
         return ((this.a << 24) >>> 0) + (this.b << 16) + (this.g << 8) + this.r;
     };
     Color.prototype.toString = function (format) {
@@ -94,7 +94,7 @@ var Color = /** @class */ (function (_super) {
         switch (format) {
             case 'hex': return convert.rgb.hex(this.vec3);
             case 'hsl':
-                vec3 = convert.rgb.hsl(this.map(function (v) { return v * 255; }));
+                vec3 = convert.rgb.hsl(Array.from(this).map(function (v) { return v * 255; }));
                 ret = "hls(" + vec3[0] + "deg," + vec3[1] + "%," + vec3[2] + "%)";
                 break;
             case 'rgb':
@@ -122,7 +122,7 @@ var Color = /** @class */ (function (_super) {
         configurable: true
     });
     Color.prototype.assign = function (another) {
-        copy(another, this);
+        copy(another, this.vec3);
         return this;
     };
     Object.defineProperty(Color, "ALICEBLUE", {

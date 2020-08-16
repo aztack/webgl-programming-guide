@@ -4,4 +4,5 @@ export declare class OOTexture extends OOWebGLObject {
     texture: WebGLBuffer;
     init(ctx: WebGLContext): this;
     bind(sampler: WebGLUniformLocation, image: HTMLImageElement): void;
+    parameteri(name: number, value: number | string, target?: number): OOTexture;
 }

@@ -5,3 +5,4 @@ export * from './buffer';
 export * from './texture';
 export * from './color';
 export * from './utils';
+export * from './math';

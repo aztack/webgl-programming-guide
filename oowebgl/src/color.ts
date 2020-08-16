@@ -1,7 +1,8 @@
 import parseColor from 'parse-color';
 import convert from 'color-convert'
 import { Vec4 } from './math/vec4';
-import { Tuple3, Tuple4 } from './types';
+import { Tuple4 } from './types';
+import { RGB } from 'color-convert/conversions';
 
 export class Color extends Vec4 {
   static readonly SupportedFormat = ['rgb' , 'rgba' , 'hex' , 'hsl'];
@@ -51,10 +52,10 @@ export class Color extends Vec4 {
       copy(this, arguments);
     } else {
       if (!color) {
-        copy(this, Color.BLACK);
+        copy(this, Color.BLACK.vec4);
       } else {
         if (typeof color === 'string') {
-          copy(parseColor(color).rgba, this);
+          copy(parseColor(color).rgba, this.vec4);
         } else if (color.length) {
           copy(this, color);
         } else if (typeof color === 'number') {
@@ -67,7 +68,7 @@ export class Color extends Vec4 {
     }
   }
 
-  valueOf(): number {
+  value(): number {
     return ((this.a << 24) >>> 0) + (this.b << 16) + (this.g << 8) + this.r;
   }
 
@@ -75,12 +76,12 @@ export class Color extends Vec4 {
     if (Color.SupportedFormat.indexOf(format) < 0) {
       throw new Error(`Color.prototype.toString(format) does not support format '${format}'`);
     }
-    let vec3: Tuple3<number>;
+    let vec3: RGB;
     let ret: string = '';
     switch(format) {
       case 'hex': return convert.rgb.hex(this.vec3);
       case 'hsl':
-        vec3 = convert.rgb.hsl(this.map(v => v*255) as Tuple3<number>);
+        vec3 = convert.rgb.hsl(Array.from(this).map(v => v*255) as RGB);
         ret = `hls(${vec3[0]}deg,${vec3[1]}%,${vec3[2]}%)`;
         break;
       case 'rgb':
@@ -103,7 +104,7 @@ export class Color extends Vec4 {
   }
 
   assign(another: Color) {
-    copy(another, this);
+    copy(another, this.vec3);
     return this;
   }
 

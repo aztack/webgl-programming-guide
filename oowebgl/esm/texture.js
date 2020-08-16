@@ -26,6 +26,12 @@ var OOTexture = /** @class */ (function (_super) {
         gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, image);
         gl.uniform1i(sampler, 0);
     };
+    OOTexture.prototype.parameteri = function (name, value, target) {
+        var gl = this.ctx;
+        // @ts-ignore
+        gl.texParameteri(target || gl.TEXTURE_2D, name, typeof value === 'number' ? value : gl[value]);
+        return this;
+    };
     return OOTexture;
 }(OOWebGLObject));
 export { OOTexture };

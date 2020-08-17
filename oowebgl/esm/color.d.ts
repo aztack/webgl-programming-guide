@@ -1,5 +1,7 @@
 import { Vec4 } from './math/vec4';
-export declare class Color extends Vec4 {
+import { Override } from './types';
+declare const Color_base: Override<Vec4, "toString">;
+export declare class Color extends Color_base {
     static readonly SupportedFormat: string[];
     static from(...args: any[]): Color;
     get r(): number;
@@ -170,3 +172,4 @@ export declare class Color extends Vec4 {
     static get YELLOW(): Color;
     static get YELLOWGREEN(): Color;
 }
+export {};

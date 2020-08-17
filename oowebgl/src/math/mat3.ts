@@ -1,5 +1,2 @@
-import { Matrix } from './matrix';
-
-export class Mat3 extends Matrix<Mat3> {
-
-}
+import { createSquareMatrixClass } from './utils';
+export class Mat3 extends createSquareMatrixClass(3) {}

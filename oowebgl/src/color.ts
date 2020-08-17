@@ -1,10 +1,10 @@
 import parseColor from 'parse-color';
 import convert from 'color-convert'
 import { Vec4 } from './math/vec4';
-import { Tuple4 } from './types';
+import { Tuple4, Override } from './types';
 import { RGB } from 'color-convert/conversions';
 
-export class Color extends Vec4 {
+export class Color extends (<Override<Vec4, 'toString'>>Vec4) {
   static readonly SupportedFormat = ['rgb' , 'rgba' , 'hex' , 'hsl'];
 
   static from(...args: any[]) {

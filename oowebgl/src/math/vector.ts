@@ -1,118 +1,62 @@
-import { hypot, square } from './utils';
+import {
+  hypot,
+  toString, copy, clone,
+  add, substract, multiply, divide,
+  scale, negate, inverse, zero, dot, normalize
+} from './utils';
 
-export abstract class Vector<RET extends Vector<RET>> extends Float32Array {
+export class Vector<RET extends Vector<RET>> extends Float32Array {
+  toString!: typeof toString;
+  add!: typeof add;
+  copy!: typeof copy;
+  clone!: typeof clone;
+  substract!: typeof substract;
+  multiply!: typeof multiply;
+  divide!: typeof divide;
+  scale!: typeof scale;
+  negate!: typeof negate;
+  inverse!: typeof inverse;
+  zero!: typeof zero;
+  dot!: typeof dot;
+  normalize!: typeof normalize;
 
-  toString() {
-    return `${this.constructor.name}(${this.join(',')})`;
+  ceil() {
+    return this._math('ceil');
   }
 
-  clone() {
-    return this.slice(0) as RET;
+  floor() {
+    return this._math('floor');
   }
 
-  copy(src: Iterable<number> | ArrayLike<number>): RET {
-    let i = 0;
-    for (let it of src) {
-      if (i >= this.length) break;
-      this[i++] = it;
-    }
-    return this as unknown as RET;
-  }
-
-  add(operand: Vector<RET>) {
-    for (let i = 0; i < this.length; i++) {
-      this[i] += operand[i];
-    }
-    return this as unknown as RET;
-  }
-
-  substract(operand: Vector<RET>) {
-    for (let i = 0; i < this.length; i++) {
-      this[i] -= operand[i];
-    }
-    return this as unknown as RET;
-  }
-
-  multiply(operand: Vector<RET>) {
-    for (let i = 0; i < this.length; i++) {
-      this[i] *= operand[i];
-    }
-    return this as unknown as RET;
-  }
-
-  divide(operand: Vector<RET>) {
-    for (let i = 0; i < this.length; i++) {
-      this[i] /= operand[i];
-    }
-    return this as unknown as RET;
-  }
-
-  scale(scale: number) {
-    for (let i = 0; i < this.length; i++) {
-      this[i] *= scale;
-    }
-    return this as unknown as RET;
-  }
-
-  negate() {
-    for (let i = 0; i < this.length; i++) {
-      this[i] = -this[i];
-    }
-    return this as unknown as RET;
-  }
-
-  inverse() {
-    for (let i = 0; i < this.length; i++) {
-      this[i] = 1 / this[i];
-    }
-    return this as unknown as RET;
-  }
-
-  nomalize() {
-    let unit = square(...this);
-    if (unit !== 0) {
-      this.scale(1 / Math.sqrt(unit));
-    } else {
-      this.zero();
-    }
-  }
-
-  dot(operand: Vector<RET>): number {
-    let acc = 0;
-    for (let i = 0; i < this.length; i++) {
-      acc = this[i] * operand[i];
-    }
-    return acc;
-  }
-
-  ceil(operand: Vector<RET>) {
-    return this._math('ceil', operand);
-  }
-
-  floor(operand: Vector<RET>) {
-    return this._math('floor', operand);
-  }
-
-  round(operand: Vector<RET>) {
-    return this._math('round', operand);
-  }
-
-  zero() {
-    for (let i = 0; i < this.length; i++) {
-      this[i] = 0;
-    }
-    return this as unknown as RET;
+  round() {
+    return this._math('round');
   }
 
   get len(): number {
     return hypot(...this);
   }
 
-  private _math(func: keyof Math, operand: Vector<RET>) {
+  private _math(func: keyof Math) {
     const fn = Math[func] as Function;
     for (let i = 0; i < this.length; i++) {
-      this[i] = fn.call(Math, operand[i]);
+      this[i] = fn.call(Math, this[i]);
     }
     return this as unknown as RET;
   }
 }
+
+Object.assign(Vector.prototype, {
+  toString,
+  copy,
+  clone,
+  add,
+  substract,
+  multiply,
+  divide,
+  scale,
+  negate,
+  inverse,
+  zero,
+  dot,
+  normalize,
+});

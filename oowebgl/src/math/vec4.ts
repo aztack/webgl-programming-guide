@@ -1,17 +1,10 @@
 import { Vector } from './vector';
+import { static_from } from './utils';
 
 export class Vec4 extends Vector<Vec4> {
-  static readonly origin: Vec4 = new Vec4([0, 0, 0]);
+  static readonly origin: Vec4 = new Vec4();
 
-  static from(...src: number[]): Vec4;
-  static from(src: Iterable<number> | ArrayLike<number>): Vec4;
-  static from(src: any): Vec4 {
-    if (arguments.length > 1) {
-      return new Vec4([0, 0, 0, 0]).copy(Array.from(arguments));
-    } else {
-      return new Vec4([0, 0, 0, 0]).copy(src);
-    }
-  }
+  static from = static_from(Vec4);
 
   constructor();
   constructor(arg: number);
@@ -20,6 +13,8 @@ export class Vec4 extends Vector<Vec4> {
   constructor(arg?: any) {
     const ret = new Float32Array(arg || 4);
     Object.setPrototypeOf(ret, Vec4.prototype);
+    // @ts-ignore
+    Object.assign(ret, this);
     return ret as Vec4;
   }
 

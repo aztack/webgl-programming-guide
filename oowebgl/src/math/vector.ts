@@ -6,7 +6,7 @@ import {
 
 import {
   divide,
-  inverse, dot, multiply, normalize, angle
+  inverse, dot, multiply, normalize, angle, lerp
 } from './utils-vec';
 
 import {
@@ -25,6 +25,7 @@ export class Vector extends Float32Array implements Copyable<Vector> {
   dot!: typeof dot;
   each!: typeof each;
   inverse!: typeof inverse;
+  lerp!: typeof lerp;
   multiply!: typeof multiply;
   negate!: typeof negate;
   normalize!: typeof normalize;
@@ -32,6 +33,7 @@ export class Vector extends Float32Array implements Copyable<Vector> {
   substract!: typeof substract;
   toString!: typeof toString;
   zero!: typeof zero;
+  
 
   ceil() {
     return this.each(Math.ceil);
@@ -67,6 +69,7 @@ Object.assign(Vector.prototype, {
   dot,
   each,
   inverse,
+  lerp,
   multiply,
   negate,
   normalize,

@@ -9,7 +9,7 @@ export const EPSILON = 0.000001;
 //#region [Functions]
 export const square = function (...args: number[]) {
   let acc = 0;
-  for (let i = 0; i < args.length; i ++) acc = args[i] * args[i];
+  for (let i = 0; i < args.length; i ++) acc += args[i] * args[i];
   return acc;
 };
 

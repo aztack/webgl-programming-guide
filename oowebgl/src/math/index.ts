@@ -4,3 +4,6 @@ export * from './vec4';
 export * from './mat2';
 export * from './mat3';
 export * from './mat4';
+export * from './vector';
+export * from './matrix';
+export * from './utils';

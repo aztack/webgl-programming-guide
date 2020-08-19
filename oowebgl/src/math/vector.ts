@@ -1,62 +1,77 @@
 import {
-  hypot,
   toString, copy, clone,
-  add, substract, multiply, divide,
-  scale, negate, inverse, zero, dot, normalize
-} from './utils';
+  add, substract,
+  scale, negate, zero, each
+} from './utils-shared';
 
-export class Vector<RET extends Vector<RET>> extends Float32Array {
-  toString!: typeof toString;
+import {
+  divide,
+  inverse, dot, multiply, normalize, angle
+} from './utils-vec';
+
+import {
+  hypot
+} from './utils'
+import { Copyable } from './types';
+
+export class Vector extends Float32Array implements Copyable<Vector> {
+  mag!: number;
+  magnitude!: number;
   add!: typeof add;
-  copy!: typeof copy;
+  angle!: typeof angle;
   clone!: typeof clone;
-  substract!: typeof substract;
-  multiply!: typeof multiply;
+  copy!: typeof copy;
   divide!: typeof divide;
-  scale!: typeof scale;
-  negate!: typeof negate;
-  inverse!: typeof inverse;
-  zero!: typeof zero;
   dot!: typeof dot;
+  each!: typeof each;
+  inverse!: typeof inverse;
+  multiply!: typeof multiply;
+  negate!: typeof negate;
   normalize!: typeof normalize;
+  scale!: typeof scale;
+  substract!: typeof substract;
+  toString!: typeof toString;
+  zero!: typeof zero;
 
   ceil() {
-    return this._math('ceil');
+    return this.each(Math.ceil);
   }
 
   floor() {
-    return this._math('floor');
+    return this.each(Math.floor);
   }
 
   round() {
-    return this._math('round');
+    return this.each(Math.round);
   }
 
-  get len(): number {
-    return hypot(...this);
-  }
-
-  private _math(func: keyof Math) {
-    const fn = Math[func] as Function;
-    for (let i = 0; i < this.length; i++) {
-      this[i] = fn.call(Math, this[i]);
-    }
-    return this as unknown as RET;
-  }
 }
 
+function mag(this: Vector) {
+  return hypot(...this);
+}
+const magGetter = {
+  get: mag,
+  enumerable: false,
+  configurable: true
+};
+Object.defineProperty(Vector.prototype, "magnitude", magGetter);
+Object.defineProperty(Vector.prototype, "mag", magGetter);
+
 Object.assign(Vector.prototype, {
-  toString,
-  copy,
-  clone,
   add,
-  substract,
-  multiply,
+  angle,
+  clone,
+  copy,
   divide,
-  scale,
-  negate,
-  inverse,
-  zero,
   dot,
+  each,
+  inverse,
+  multiply,
+  negate,
   normalize,
+  scale,
+  substract,
+  toString,
+  zero,
 });

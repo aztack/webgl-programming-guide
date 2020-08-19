@@ -1,7 +1,7 @@
 import { Vector } from './vector';
-import { static_from } from './utils';
+import { static_from } from './utils-shared';
 
-export class Vec4 extends Vector<Vec4> {
+export class Vec4 extends Vector {
   static readonly origin: Vec4 = new Vec4();
 
   static from = static_from(Vec4);
@@ -17,9 +17,8 @@ export class Vec4 extends Vector<Vec4> {
     Object.assign(ret, this);
     return ret as Vec4;
   }
-
-  cross(/* operand: Vec4 */): Vec4 {
-    // TODO
-    throw new Error(`Not implemented`);
-  }
 }
+
+Object.assign(Vec4.prototype, {
+
+});

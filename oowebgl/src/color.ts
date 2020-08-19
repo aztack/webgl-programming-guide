@@ -46,8 +46,8 @@ export class Color extends (<Override<Vec4, 'toString'>>Vec4) {
   constructor(color?: any) {
     super();
     // https://github.com/Microsoft/TypeScript/wiki/FAQ#why-doesnt-extending-built-ins-like-error-array-and-map-work
-    Object.setPrototypeOf(this, Color.prototype);
-    this.constructor = Color;
+    // Object.setPrototypeOf(this, Color.prototype);
+    // this.constructor = Color;
     if (arguments.length >= 3) {
       copy(this, arguments);
     } else {

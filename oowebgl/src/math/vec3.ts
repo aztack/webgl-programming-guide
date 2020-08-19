@@ -1,8 +1,8 @@
 import { Vector } from './vector';
-import { static_from } from './utils';
+import { static_from } from './utils-shared';
 
-export class Vec3 extends Vector<Vec3> {
-  static origin: Vec3 = new Vec3();
+export class Vec3 extends Vector {
+  static readonly origin: Vec3 = new Vec3();
 
   static from = static_from(Vec3);
 

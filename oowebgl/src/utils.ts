@@ -103,3 +103,6 @@ export const caf = (() => {
 })();
 
 export let DEBUG = true;
+export function setDebug(val: boolean) {
+  DEBUG = val;
+}

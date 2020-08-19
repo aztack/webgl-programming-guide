@@ -1,18 +1,26 @@
 import {
   toString, copy, clone,
   add, substract,
-  scale, negate, zero,
-  get, put, mat_multiply
+  scale, negate, zero
+} from './utils-shared';
+
+import {
+  get, put, multiply
+} from './utils-mat';
+
+import {
+
 } from './utils';
 import { Tuple2 } from '../types';
+import { Copyable } from './types';
 
-export class Matrix extends Float32Array {
+export class Matrix extends Float32Array implements Copyable<Matrix> {
   shape!: Tuple2<number>;
   add!: typeof add;
   clone!: typeof clone;
   copy!: typeof copy;
   get!: typeof get;
-  multiply!: typeof mat_multiply;
+  multiply!: typeof multiply;
   negate!: typeof negate;
   put!: typeof put;
   scale!: typeof scale;
@@ -25,7 +33,7 @@ Object.assign(Matrix.prototype, {
   clone,
   copy,
   get,
-  multiply: mat_multiply,
+  multiply,
   negate,
   put,
   scale,

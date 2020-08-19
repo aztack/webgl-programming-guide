@@ -18,7 +18,7 @@ export const hypot = typeof Math.hypot === 'function' ? Math.hypot : function (.
 };
 
 export function fuzzyEquals(a: number, b: number) {
-  return Math.abs(a - b) <= EPSILON * Math.max(1.0, Math.abs(a), Math.abs(b))
+  return Math.abs(a - b) <= EPSILON * Math.max(1.0, Math.abs(a), Math.abs(b));
 }
 
 export function clamp(value: number, min: number, max: number) {
@@ -27,7 +27,7 @@ export function clamp(value: number, min: number, max: number) {
   } else if (value > max) {
     return max;
   }
-  return value
+  return value;
 }
 
 export function fuzzyClamp(value: number, min: number, max: number) {
@@ -36,7 +36,7 @@ export function fuzzyClamp(value: number, min: number, max: number) {
   } else if (Math.abs(value - max) < EPSILON) {
     return max;
   }
-  return value
+  return value;
 }
 
 export function degreeToRadian(degree: Degree) {

@@ -53,9 +53,13 @@ export function normalize<T extends Vector>(this: T): T {
   }
   return this;
 }
-// @ts-ignore
-export function lerp<T extends Vector>(this: T, a: T, b: T): T {
-  // TODO:
+
+export function lerp<T extends Vector>(this: T, a: T, b: T, t: number): T {
+  let a0: number;
+  for (let i = 0; i < this.length; i++) {
+    a0 = a[0];
+    this[0] = a0 + (b[0] - a0) * t;
+  }
   return this;
 }
 //#endregion

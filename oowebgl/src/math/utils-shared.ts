@@ -1,4 +1,5 @@
 import { Copyable, ConstructorOf, From } from './types';
+import { fuzzyEquals as _fuzzyEquals } from './utils'
 
 //#region Creation and Convertion
 export function static_from<T extends Copyable<T>>(Ctor: ConstructorOf<T>): From<T> {
@@ -69,4 +70,24 @@ export function each<T extends Float32Array>(this: T, operation: (element: numbe
   }
   return this;
 }
-//#region
+//#endregion
+
+//#region Comparison
+
+export function strictEquals<T extends Float32Array>(this: T, a: T): boolean {
+  if (this.length !== a.length) return false;
+  for (let i = 0; i < this.length; i++) {
+    if (this[i] !== a[i]) return false;
+  }
+  return true;
+}
+
+export function fuzzyEquals<T extends Float32Array>(this: T, a: T): boolean {
+  if (this.length !== a.length) return false;
+  for (let i = 0; i < this.length; i++) {
+    if (!_fuzzyEquals(this[i], a[i])) return false;
+  }
+  return true;
+}
+
+//#endregion

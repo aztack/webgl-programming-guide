@@ -102,7 +102,7 @@ export const caf = (() => {
     }
 })();
 
-export let DEBUG = true;
+export let DEBUG = false;
 export function setDebug(val: boolean) {
   DEBUG = val;
 }

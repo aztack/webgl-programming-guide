@@ -1,5 +1,3 @@
-import { Vec3 } from "./vec3";
-
 export type FromNumbers<T> = (...src: numbers[]) => T;
 export type FromIterableArrayLike<T> = (src: Iterable<number> | ArrayLike<number>) => T;
 export type FromAny<T> = (src: any) => T;

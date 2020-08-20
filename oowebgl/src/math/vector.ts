@@ -1,7 +1,7 @@
 import {
   toString, copy, clone,
   add, substract,
-  scale, negate, zero, each
+  scale, negate, zero, each, static_from
 } from './utils-shared';
 
 import {
@@ -15,6 +15,7 @@ import {
 import { Copyable } from './types';
 
 export class Vector extends Float32Array implements Copyable<Vector> {
+  static from = static_from(Vector);
   mag!: number;
   magnitude!: number;
   add!: typeof add;
@@ -33,7 +34,7 @@ export class Vector extends Float32Array implements Copyable<Vector> {
   substract!: typeof substract;
   toString!: typeof toString;
   zero!: typeof zero;
-  
+
 
   ceil() {
     return this.each(Math.ceil);

@@ -31,6 +31,25 @@ export function multiply<T extends Matrix>(this: T, operand: Matrix): Matrix {
   return c;
 }
 
+export function determinant2x2(...a: number[]): number;
+export function determinant2x2(
+  a: number, b: number,
+  c: number, d: number
+): number {
+  // https://en.wikipedia.org/wiki/Determinant#2_%C3%97_2_matrices
+  return a*d - b*c;
+}
+
+export function determinant3x3(...a: number[]): number;
+export function determinant3x3(
+  a: number, b: number, c: number,
+  d: number, e: number, f: number,
+  g: number, h: number, i: number
+): number {
+  // https://en.wikipedia.org/wiki/Determinant#3_%C3%97_3_matrices
+  return a*e*i + b*f*g + c*d*h - c*e*g - b*d*i - a*f*h;
+}
+
 export function createIdentity(size: number) {
   const ident = Array(size * size);
   for (let i = 0; i < size; i++) {

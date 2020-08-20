@@ -1,7 +1,7 @@
 import {
   toString, copy, clone,
   add, substract,
-  scale, negate, zero
+  scale, negate, zero, static_from
 } from './utils-shared';
 
 import {
@@ -16,6 +16,7 @@ import { Copyable } from './types';
 
 export class Matrix extends Float32Array implements Copyable<Matrix> {
   shape!: Tuple2<number>;
+  static from = static_from(Matrix);
   add!: typeof add;
   clone!: typeof clone;
   copy!: typeof copy;

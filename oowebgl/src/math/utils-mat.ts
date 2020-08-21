@@ -79,14 +79,14 @@ export function createIdentity(size: number) {
 
 export function createSquareMatrixClass(size: number) {
   return class _Matrix extends Matrix {
-    static identity: _Matrix = new _Matrix(createIdentity(size));
+    static readonly identity: _Matrix = new _Matrix(createIdentity(size));
     shape!: Tuple2<number>;
     constructor();
     constructor(arg: number);
     constructor(arg: Iterable<number> | ArrayLike<number> | ArrayBuffer);
     //@ts-ignore
     constructor(arg?: any) {
-      const ret = new Float32Array(arg || size);
+      const ret = new Float32Array(arg || size * size);
       Object.setPrototypeOf(ret, _Matrix.prototype);
       Object.defineProperty(ret, 'shape', {
         value: Object.freeze([size, size]),

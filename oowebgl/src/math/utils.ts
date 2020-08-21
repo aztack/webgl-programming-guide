@@ -7,11 +7,17 @@ export const EPSILON = 0.000001;
 //#endregion
 
 //#region [Functions]
-export const square = function (...args: number[]) {
+export function square(...args: number[]) {
   let acc = 0;
   for (let i = 0; i < args.length; i ++) acc += args[i] * args[i];
   return acc;
 };
+
+export function sum(...args: number[]) {
+  let acc = 0;
+  for (let i = 0; i < args.length; i ++) acc += args[i];
+  return acc;
+}
 
 export const hypot = typeof Math.hypot === 'function' ? Math.hypot : function (...args: number[]) {
   return Math.sqrt(square(...args));

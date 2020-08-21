@@ -17,8 +17,16 @@ export class Vec4 extends Vector {
     Object.assign(ret, this);
     return ret as Vec4;
   }
+
+  cross(operand1: Vec4, operand2: Vec4): Vec4 {
+    const [a, b, c, d] = this;
+    const [e, f, g, h] = operand1;
+    const [i, j, k, l] = operand2;
+    return Vec4.from(
+      +d*g*j - c*h*j - d*f*k + b*h*k + c*f*l - b*g*l,
+      -d*g*i + c*h*i + d*e*k - a*h*k - c*e*l + a*g*l,
+      +d*f*i - b*h*i - d*e*j + a*h*j + b*e*l - a*f*l,
+      -c*f*i + b*g*i + c*e*j - a*g*j - b*e*k + a*f*k
+    );
+  }
 }
-
-Object.assign(Vec4.prototype, {
-
-});

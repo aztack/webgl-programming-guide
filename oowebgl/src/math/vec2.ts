@@ -20,6 +20,7 @@ export class Vec2 extends Vector {
   }
 
   cross(operand: Vec2): Vec3 {
+    // (a, b, 0)x(c, d, 0) = (0, 0, ad-bc)
     return Vec3.from(0, 0, this[0] * operand[1] - this[1] * operand[0]);
   }
 }

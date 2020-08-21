@@ -18,8 +18,14 @@ export class Vec3 extends Vector {
     return ret as Vec3;
   }
 
-  cross(/*operand: Vec3*/): Vec3 {
-    // TODO
-    throw new Error(`Not implemented`);
+  cross(operand: Vec3): Vec3 {
+    // https://en.wikipedia.org/wiki/Cross_product#Mnemonic
+    const [bx, by, bz] = this;
+    const [cx, cy, cz] = operand;
+    return Vec3.from(
+      by*cz - bz*cy,
+      bz*cx - bx*cz,
+      bx*cy - by*cx
+    );
   }
 }

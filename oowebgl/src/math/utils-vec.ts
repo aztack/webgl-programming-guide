@@ -1,5 +1,4 @@
 import { square, fuzzyClamp } from './utils';
-import { scale, zero } from './utils-shared';
 import { Vector } from './vector';
 import { Radian } from './types';
 
@@ -47,11 +46,24 @@ export function angle<T extends Vector>(this: T, vec: T): Radian {
 export function normalize<T extends Vector>(this: T): T {
   let unit = square(...this);
   if (unit !== 0) {
-    scale.call(this, 1 / Math.sqrt(unit));
+    this.scale(1 / Math.sqrt(unit))
   } else {
-    zero.call(this);
+    this.zero();
   }
   return this;
+}
+
+export function distance<T extends Vector>(this: T, operand: T): number {
+  return Math.sqrt(this.squaredDistance(operand));
+}
+
+export function squaredDistance<T extends Vector>(this: T, operand: T): number {
+  let acc = 0;
+  for (let i = 0; i < this.length; i ++) {
+    const dis = this[i] - operand[i];
+    acc += dis * dis;
+  }
+  return acc;
 }
 
 export function lerp<T extends Vector>(this: T, a: T, b: T, t: number): T {

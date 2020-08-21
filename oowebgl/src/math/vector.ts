@@ -6,7 +6,7 @@ import {
 
 import {
   divide,
-  inverse, dot, multiply, normalize, angle, lerp
+  inverse, dot, multiply, normalize, angle, lerp, squaredDistance, distance
 } from './utils-vec';
 
 import {
@@ -22,6 +22,7 @@ export class Vector extends Float32Array implements Copyable<Vector> {
   angle!: typeof angle;
   clone!: typeof clone;
   copy!: typeof copy;
+  distance!: typeof distance;
   divide!: typeof divide;
   dot!: typeof dot;
   each!: typeof each;
@@ -31,6 +32,7 @@ export class Vector extends Float32Array implements Copyable<Vector> {
   negate!: typeof negate;
   normalize!: typeof normalize;
   scale!: typeof scale;
+  squaredDistance!: typeof squaredDistance;
   substract!: typeof substract;
   toString!: typeof toString;
   zero!: typeof zero;
@@ -67,6 +69,7 @@ Object.assign(Vector.prototype, {
   clone,
   copy,
   divide,
+  distance,
   dot,
   each,
   inverse,
@@ -75,6 +78,7 @@ Object.assign(Vector.prototype, {
   negate,
   normalize,
   scale,
+  squaredDistance,
   substract,
   toString,
   zero,

@@ -50,6 +50,23 @@ export function determinant3x3(
   return a*e*i + b*f*g + c*d*h - c*e*g - b*d*i - a*f*h;
 }
 
+export function determinant4x4(...a: number[]): number;
+export function determinant4x4(
+  a:number, b:number, c:number, d:number,
+  e:number, f:number, g:number, h:number,
+  i:number, j:number, k:number, l:number,
+  m:number, n:number, o:number, p:number
+): number {
+  return (
+    d*g*j*m - c*h*j*m - d*f*k*m + b*h*k*m +
+    c*f*l*m - b*g*l*m - d*g*i*n + c*h*i*n +
+    d*e*k*n - a*h*k*n - c*e*l*n + a*g*l*n +
+    d*f*i*o - b*h*i*o - d*e*j*o + a*h*j*o +
+    b*e*l*o - a*f*l*o - c*f*i*p + b*g*i*p +
+    c*e*j*p - a*g*j*p - b*e*k*p + a*f*k*p
+  );
+}
+
 export function createIdentity(size: number) {
   const ident = Array(size * size);
   for (let i = 0; i < size; i++) {

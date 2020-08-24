@@ -18,4 +18,30 @@ export class Mat4 extends createSquareMatrixClass(4) {
     */
     return det4(...this);
   }
+
+  transpose() {
+    const [
+       , b, c, d,
+      e,  , g, h,
+      i, j,  , l,
+      m, n, o,
+    ] = this;
+    // this[0] = a;
+    this[1] = e;
+    this[2] = i;
+    this[3] = m;
+    this[4] = b;
+    // this[5] = f;
+    this[6] = j;
+    this[7] = n;
+    this[8] = c;
+    this[9] = g;
+    // this[10] = k;
+    this[11] = o;
+    this[12] = d;
+    this[13] = h;
+    this[14] = l;
+    // this[15] = p;
+    return  this;
+  }
 }

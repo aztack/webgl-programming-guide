@@ -16,17 +16,17 @@ export class Mat2 extends createSquareMatrixClass(2) {
     return this;
   }
 
-  inverse() {
+  adjugate(): Mat2 | null {
     const det = this.determinant();
     if (det === 0) return null;
     const [
       a, b,
       c, d
     ] = this;
-    this[0] = +d / det;
-    this[1] = -b / det;
-    this[2] = -c / det;
-    this[3] = +a / det;
+    this[0] = +d;
+    this[1] = -b;
+    this[2] = -c;
+    this[3] = +a;
     return this;
   }
 }

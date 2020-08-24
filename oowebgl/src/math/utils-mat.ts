@@ -67,6 +67,19 @@ export function determinant4x4(
   );
 }
 
+export function inverse<T extends Matrix>(this: T): Matrix | null {
+  if (!this.isSquare) return null;
+  let det = 0;
+  switch (this.shape[0]) {
+    case 2: det = determinant2x2(...this);break;
+    case 3: det = determinant3x3(...this);break;
+    case 4: det = determinant4x4(...this);break;
+    default: return null;
+  }
+  if (det === 0) return null;
+  return (this.adjugate() as Matrix).scale(1 / det);
+}
+
 export function createIdentity(size: number) {
   const ident = Array(size * size);
   for (let i = 0; i < size; i++) {

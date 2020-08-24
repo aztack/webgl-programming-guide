@@ -5,7 +5,7 @@ import {
 } from './utils-shared';
 
 import {
-  get, put, multiply
+  get, put, multiply, inverse
 } from './utils-mat';
 
 import {
@@ -18,6 +18,9 @@ export class Matrix extends Float32Array implements Copyable<Matrix> {
   shape!: Tuple2<number>;
   static from = static_from(Matrix);
   add!: typeof add;
+  adjugate(): Matrix | null {
+    throw new Error(`Not implemented`);
+  }
   clone!: typeof clone;
   copy!: typeof copy;
   get!: typeof get;
@@ -28,12 +31,16 @@ export class Matrix extends Float32Array implements Copyable<Matrix> {
   substract!: typeof substract;
   toString!: typeof toString;
   zero!: typeof zero;
+  get isSquare() {
+    return this.shape[0] === this.shape[1];
+  }
 }
 Object.assign(Matrix.prototype, {
   add,
   clone,
   copy,
   get,
+  inverse,
   multiply,
   negate,
   put,

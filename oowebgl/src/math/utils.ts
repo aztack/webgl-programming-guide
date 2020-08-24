@@ -52,4 +52,10 @@ export function degreeToRadian(degree: Degree) {
 export function radianToDegree(radian: Radian) {
   return radian * DEG;
 }
+
+export const random = Math.random;
+
+export function randomRadian(n: number = 1): Radian {
+  return random() * Math.PI * n;
+}
 //#endregion

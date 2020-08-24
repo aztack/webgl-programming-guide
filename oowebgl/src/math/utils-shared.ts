@@ -64,9 +64,9 @@ export function zero<T extends Float32Array>(this: T) {
 //#endregion
 
 //#region Iteration
-export function each<T extends Float32Array>(this: T, operation: (element: number) => number) {
+export function each<T extends Float32Array>(this: T, operation: (element: number, index: number) => number) {
   for (let i = 0; i < this.length; i++) {
-    this[i] = operation(this[i]);
+    this[i] = operation(this[i], i);
   }
   return this;
 }

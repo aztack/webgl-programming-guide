@@ -1,11 +1,19 @@
 import { Vector } from './vector';
 import { Vec3 } from './vec3';
 import { static_from } from './utils-shared';
+import { randomRadian } from './utils';
 
 export class Vec2 extends Vector {
   static readonly origin: Vec2 = new Vec2();
 
   static from = static_from(Vec2);
+  static random(r: number = 1.0) {
+    const theta = randomRadian(2);
+    return Vec2.from(
+      r * Math.cos(theta), // x
+      r * Math.sin(theta)  // y
+    );
+  }
 
   constructor();
   constructor(arg: number);
@@ -17,6 +25,14 @@ export class Vec2 extends Vector {
     // @ts-ignore
     Object.assign(ret, this);
     return ret as Vec2;
+  }
+
+  get x() {
+    return this[0];
+  }
+
+  get y() {
+    return this[1];
   }
 
   cross(operand: Vec2): Vec3 {

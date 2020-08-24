@@ -1,10 +1,32 @@
 import { Vector } from './vector';
 import { static_from } from './utils-shared';
+import { randomRadian } from './utils';
 
 export class Vec4 extends Vector {
   static readonly origin: Vec4 = new Vec4();
 
   static from = static_from(Vec4);
+
+  static random(r: number = 1.0) {
+    // https://en.wikipedia.org/wiki/N-sphere#Spherical_coordinates
+    const phi1 = randomRadian(2);
+    const phi2 = randomRadian(2);
+    const phi3 = randomRadian(2);
+
+    // const x4 = r * Math.cos(phi1);
+    // const x3 = r * Math.sin(phi1) * Math.cos(phi2);
+    // const x2 = r * Math.sin(phi1) * Math.sin(phi2) * Math.cos(phi3);
+    // const x1 = r * Math.sin(phi1) * Math.sin(phi2) * Math.sin(phi3);
+
+    const x4 = r * Math.cos(phi1);
+    const t1 = r * Math.sin(phi1);
+    const x3 = t1 * Math.cos(phi2);
+    const t2 = t1 * Math.sin(phi2);
+    const x2 = t2 * Math.cos(phi3);
+    const x1 = t2 * Math.sin(phi3);
+
+    return Vec4.from(x1, x2, x3, x4);
+  }
 
   constructor();
   constructor(arg: number);

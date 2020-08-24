@@ -50,6 +50,14 @@ export class Vector extends Float32Array implements Copyable<Vector> {
     return this.each(Math.round);
   }
 
+  min(operand: Vector) {
+    return this.each((ele: number, index: number) => Math.min(ele, operand[index]));
+  }
+
+  max(operand: Vector) {
+    return this.each((ele: number, index: number) => Math.max(ele, operand[index]));
+  }
+
 }
 
 function mag(this: Vector) {
